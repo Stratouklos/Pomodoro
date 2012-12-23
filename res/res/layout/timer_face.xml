@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2011. Efstratios Xakoustos all rights reserved. -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent">
+    <TextView android:id="@+id/timer_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:height="100dp"
+    android:width="200dp"
+    android:gravity="center"
+    android:textSize="58sp"
+    android:textColor="@color/White"
+    android:background="@drawable/timer_face"/>
+</LinearLayout>

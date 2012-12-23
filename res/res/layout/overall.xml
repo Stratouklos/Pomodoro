@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2011. Efstratios Xakoustos all rights reserved. -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent">
+    <TableLayout android:id="@+id/tableLayout_overall_parent"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent">
+        <TableRow android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent">
+            <TextView
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:text="@string/pomodoros_started"
+            android:layout_weight="1"
+            android:textSize="22sp"/>
+            <TextView android:id="@+id/Text_overall_pomodorosStarted"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="22sp"
+            android:gravity="right"/>
+        </TableRow>
+        <TableRow android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent">
+            <TextView
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:text="@string/pomodoros_completed"
+            android:layout_weight="1"
+            android:textSize="22sp"/>
+            <TextView android:id="@+id/Text_overall_pomodorosCompleted"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="22sp"
+            android:gravity="right"/>
+        </TableRow>
+        <TableRow android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent">
+            <TextView
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:text="@string/tasks_completed"
+            android:layout_weight="1"
+            android:textSize="22sp"/>
+            <TextView android:id="@+id/Text_overall_tasksCompleted"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="22sp"
+            android:gravity="right"/>
+        </TableRow>
+        <TableRow android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent">
+             <TextView
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:text="@string/work_units_completed"
+            android:layout_weight="1"
+            android:textSize="22sp"/>
+            <TextView android:id="@+id/Text_overall_workUnitsCompleted"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="22sp"
+            android:gravity="right"/>
+        </TableRow>
+        <TableRow android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent">
+            <TextView
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:text="@string/time_worked"
+            android:layout_weight="1"
+            android:textSize="22sp"/>
+            <TextView android:id="@+id/Text_overall_timeWorked"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="22sp"
+            android:gravity="right"/>
+        </TableRow>
+        <TableRow android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent">
+            <TextView
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:text="@string/time_break"
+            android:layout_weight="1"
+            android:textSize="22sp"/>
+            <TextView android:id="@+id/Text_overall_timeOnBreak"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="22sp"
+            android:gravity="right"/>
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

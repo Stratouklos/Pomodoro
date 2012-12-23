@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2011. Efstratios Xakoustos all rights reserved. -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+    android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+    android:background="@drawable/sky_background">
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        android:textSize="28sp"/>
+    <EditText android:id="@+id/title"
+        android:hint="@string/title_hint"
+        android:layout_width="fill_parent"
+        android:imeOptions="actionNext"
+        android:nextFocusDown="@+id/priority"
+        android:nextFocusUp="@+id/work_units"
+        android:layout_height="80dp"
+        style="?android:attr/textAppearanceLargeInverse"
+        android:textSize="24sp"
+        android:singleLine="true"/>
+    <LinearLayout android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+        <LinearLayout android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            <TextView android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="22sp"
+                android:text="@string/priority"/>
+            <com.nullpointereng.android.widgets.NumberPicker
+                android:id="@+id/priority"
+                android:nextFocusUp="@+id/title"
+                android:nextFocusDown="@+id/work_units"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:text="@string/work_units"/>
+            <com.nullpointereng.android.widgets.NumberPicker
+                android:id="@+id/work_units"
+                android:nextFocusDown="@+id/confirm"
+                android:nextFocusUp="@+id/priority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+    <Button android:id="@+id/confirm"
+        android:padding="30dp"
+        android:text="@string/confirm"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"/>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/task_hints"
+        android:textColor="@color/Black"
+        android:textSize="20sp"/>
+</LinearLayout>

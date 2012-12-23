@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2011. Efstratios Xakoustos all rights reserved. -->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <LinearLayout android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.nullpointereng.android.widgets.NumberPickerButton
+                android:id="@+id/increment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/timepicker_up_btn" />
+            <com.nullpointereng.android.widgets.NumberPickerButton
+                android:id="@+id/decrement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/timepicker_down_btn" />
+        </LinearLayout>
+        <EditText
+            android:id="@+id/timepicker_input"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:singleLine="true"
+            style="?android:attr/textAppearanceLargeInverse"
+            android:textColor="@android:color/primary_text_light"
+            android:textSize="24sp"
+            android:background="@drawable/timepicker_input"/>
+    </LinearLayout>
+</merge>

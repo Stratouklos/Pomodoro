@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (c) 2011. Efstratios Xakoustos all rights reserved. -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/timer_preferences"
+        android:key="first_category">
+        <android.preference.EditTextPreference
+            android:title="@string/pomodoro_length"
+            android:key="pomodoro_length"
+            android:summary="@string/pomodoro_preference_summary"
+            android:defaultValue="25"
+            android:numeric="integer"
+            android:maxLength="2"/>
+        <android.preference.EditTextPreference
+            android:title="@string/small_break_length"
+            android:key="small_break_length"
+            android:summary="@string/small_break_summary"
+            android:defaultValue="5"
+            android:numeric="integer"
+            android:maxLength="2"/>
+        <android.preference.EditTextPreference
+            android:title="@string/big_break_length"
+            android:key="big_break_length"
+            android:summary="@string/big_break_summary"
+            android:defaultValue="10"
+            android:numeric="integer"
+            android:maxLength="2"/>
+        <android.preference.EditTextPreference
+            android:title="@string/pomodoro_interval"
+            android:summary="@string/pomodoro_interval_summary"
+            android:key="pomodoro_interval"
+            android:defaultValue="4"
+            android:numeric="integer"
+            android:maxLength="1"/>
+        </PreferenceCategory>
+    <PreferenceCategory
+            android:title="@string/sound_preferences"
+            android:key="sound_preferences">
+            <android.preference.CheckBoxPreference
+                android:title="@string/chime_title"
+                android:key="dinging"
+                android:defaultValue="true"
+                android:summary="@string/chime_preference_summary" />
+            <android.preference.CheckBoxPreference
+                android:title="@string/tick_title"
+                android:key="ticking"
+                android:defaultValue="true"
+                android:summary="@string/tick_preference_summary" />
+    </PreferenceCategory>
+</PreferenceScreen>

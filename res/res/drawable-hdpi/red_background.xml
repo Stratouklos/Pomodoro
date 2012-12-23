@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2011. Efstratios Xakoustos all rights reserved. -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+        <gradient
+         android:endColor="#000000"
+         android:startColor="@color/Red"
+         android:angle="90"/>
+</shape>

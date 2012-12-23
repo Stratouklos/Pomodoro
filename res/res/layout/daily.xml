@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2011. Efstratios Xakoustos all rights reserved. -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/layout_daily_parent"
+android:layout_height="fill_parent"
+android:layout_width="fill_parent"
+android:orientation="vertical"        >
+    <TextView android:id="@+id/day2DayTitleBar"
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:textSize="22sp"/>
+    <ScrollView android:fillViewport="true"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:layout_weight="1">
+    <TableLayout android:stretchColumns="1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+        <TableRow android:paddingBottom="3dp" >
+            <TextView android:id="@+id/tasksTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"/>
+            <TextView  android:id="@+id/tasksValue"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:layout_gravity="right"/>
+        </TableRow>
+        <TableRow android:paddingBottom="3dp">
+            <TextView android:id="@+id/pomodorosTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"/>
+            <TextView  android:id="@+id/pomodorosValue"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:layout_gravity="right"/>
+        </TableRow>
+        <TableRow android:paddingBottom="3dp">
+            <TextView android:id="@+id/workUnitsTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"/>
+            <TextView android:id="@+id/workUnitsValue"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:layout_gravity="right"/>
+        </TableRow>
+        <TableRow android:paddingBottom="3dp">
+            <TextView android:id="@+id/hoursTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"/>
+            <TextView android:id="@+id/hoursValue"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:layout_gravity="right"/>
+        </TableRow>
+        <TableRow android:paddingBottom="3dp">
+            <TextView android:id="@+id/workUnitsPerPomodoroTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"/>
+            <TextView android:id="@+id/workUnitsPerPomodoroValue"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:layout_gravity="right"/>
+        </TableRow>
+        <TableRow android:paddingBottom="3dp">
+            <TextView android:id="@+id/tasksPerPomodoroTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"/>
+            <TextView android:id="@+id/tasksPerPomodoroValue"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:layout_gravity="right"/>
+        </TableRow>
+    </TableLayout>
+    </ScrollView>
+    <RadioGroup android:id="@+id/radioGroup_daily_dayPicker"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+        <LinearLayout android:orientation="horizontal"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:paddingBottom="1dp"
+        android:paddingTop="1dp"
+        android:layout_gravity="bottom">
+            <RadioButton android:id="@+id/radio_daily_threeDays"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/three_days"
+            android:textSize="20sp"
+            android:layout_weight="1"/>
+            <RadioButton android:id="@+id/radio_daily_fiveDays"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/five_days"
+            android:textSize="20sp"
+            android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:paddingTop="1dp"
+        android:layout_gravity="bottom">
+            <RadioButton android:id="@+id/radio_daily_fifteenDays"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fifteen_days"
+            android:textSize="20sp"
+            android:layout_weight="1"/>
+            <RadioButton android:id="@+id/radio_daily_thirtyDays"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/thirty_days"
+            android:textSize="20sp"
+            android:layout_weight="1"/>
+        </LinearLayout>
+    </RadioGroup>
+</LinearLayout>
