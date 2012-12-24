@@ -2,8 +2,8 @@ package com.nullpointerengineering.android.pomodoro.activities;
 
 
 import android.os.Bundle;
-import com.example.Pomodoro.R;
 import com.google.inject.Inject;
+import com.nullpointerengineering.android.pomodoro.R;
 import com.nullpointerengineering.android.pomodoro.utilities.Eula;
 import roboguice.activity.RoboActivity;
 
