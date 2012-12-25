@@ -8,7 +8,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
-import com.example.Pomodoro.R;
+import com.nullpointerengineering.android.pomodoro.R;
 
 /*
  * Created by IntelliJ IDEA.
