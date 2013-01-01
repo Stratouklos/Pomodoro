@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
+import com.google.inject.Inject;
 import com.nullpointerengineering.android.pomodoro.R;
 
 /*
@@ -21,6 +22,11 @@ import com.nullpointerengineering.android.pomodoro.R;
 
 
 public class Eula {
+
+    @Inject
+    public Eula(){
+        super();
+    }
 
     private PackageInfo getPackageInfo(Activity activity) {
         PackageInfo pi = null;
