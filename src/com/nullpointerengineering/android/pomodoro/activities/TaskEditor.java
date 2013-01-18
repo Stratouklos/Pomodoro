@@ -1,5 +1,6 @@
 package com.nullpointerengineering.android.pomodoro.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
@@ -8,10 +9,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import com.google.inject.Inject;
 import com.nullpointerengineering.android.pomodoro.R;
 import com.nullpointerengineering.android.pomodoro.widgets.NumberPicker;
-import roboguice.activity.RoboActivity;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,11 +19,11 @@ import roboguice.activity.RoboActivity;
  * Time: 7:01 PM
  * An activity to create/edit tasks.
  */
-public class TaskEditor extends RoboActivity {
+public class TaskEditor extends Activity {
 
-    @Inject private EditText titleText;
-    @Inject private NumberPicker priorityPicker;
-    @Inject private NumberPicker estimationPicker;
+    private EditText titleText;
+    private NumberPicker priorityPicker;
+    private NumberPicker estimationPicker;
     private long taskId;
 
     @Override

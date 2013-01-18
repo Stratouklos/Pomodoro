@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:textSize="22sp"
                 android:text="@string/priority"/>
-            <com.nullpointereng.android.widgets.NumberPicker
+            <com.nullpointerengineering.android.pomodoro.widgets.NumberPicker
                 android:id="@+id/priority"
                 android:nextFocusUp="@+id/title"
                 android:nextFocusDown="@+id/work_units"
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
                 android:text="@string/work_units"/>
-            <com.nullpointereng.android.widgets.NumberPicker
+            <com.nullpointerengineering.android.pomodoro.widgets.NumberPicker
                 android:id="@+id/work_units"
                 android:nextFocusDown="@+id/confirm"
                 android:nextFocusUp="@+id/priority"

@@ -12,5 +12,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".activities.TaskEditor"
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+                  android:windowSoftInputMode="adjustUnspecified"/>
+        <activity android:name=".activities.PreferencesEditor"
+                  />
     </application>
+    <activity android:name=".activities.PreferencesEditor"
+              android:label="Select Preferences"/>1
 </manifest>

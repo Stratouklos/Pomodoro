@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.nullpointerengineering.android.pomodoro.R;
-import roboguice.inject.InjectView;
 
 /*
  * Created by IntelliJ IDEA.
@@ -16,8 +15,6 @@ import roboguice.inject.InjectView;
  * Displays the time.
  */
 public class TimerFace extends LinearLayout {
-
-    @InjectView(R.id.timer_text) private TextView display;
 
     /**
      * Time displaying layout.
@@ -43,6 +40,7 @@ public class TimerFace extends LinearLayout {
         else t = "" + minutes;
         if (seconds < 10) t = t + ":0" + seconds;           // Add a 0 to keep digits balanced.
         else t = t + ":" + seconds;
+        TextView display = (TextView) findViewById(R.id.timer_text);
         display.setText(t);                              //Time in the format of mm:ss
     }
 

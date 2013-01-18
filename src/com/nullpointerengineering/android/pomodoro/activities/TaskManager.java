@@ -1,6 +1,7 @@
 package com.nullpointerengineering.android.pomodoro.activities;
 
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,15 +15,13 @@ import com.nullpointerengineering.android.pomodoro.R;
 import com.nullpointerengineering.android.pomodoro.utilities.Eula;
 import roboguice.activity.RoboListActivity;
 
-public class TaskManager extends RoboListActivity {
-
-    @Inject    Eula eula;
+public class TaskManager extends ListActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pomodoro);
-
+        Eula eula = new Eula();
         eula.show(this);
         ListView list = getListView();
         registerForContextMenu(list);

@@ -8,12 +8,12 @@
         <LinearLayout android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <com.nullpointereng.android.widgets.NumberPickerButton
+            <com.nullpointerengineering.android.pomodoro.widgets.NumberPickerButton
                 android:id="@+id/increment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/timepicker_up_btn" />
-            <com.nullpointereng.android.widgets.NumberPickerButton
+            <com.nullpointerengineering.android.pomodoro.widgets.NumberPickerButton
                 android:id="@+id/decrement"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
