@@ -41,13 +41,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    private static final String CREATE_TASKS_TABLE = "create table "+ TABLE_TASKS +" ("+
+    private static final String CREATE_TASKS_TABLE = "create table "+ TABLE_TASKS +" ( "+
             TASK_KEY_ID        + " integer primary key autoincrement, " +
             TASK_TITLE         + " TEXT not null, " +
             TASK_PRIORITY      + " INTEGER not null, " +
             TASK_ESTIMATE      + " INTEGER not null, " +
             TASK_ACTUAL        + " INTEGER, " +
-            TASK_TIME_CREATED  + " TIMESTAMP default DATETIME('now'), " +
+            TASK_TIME_CREATED  + " TIMESTAMP default CURRENT_TIMESTAMP, " +
             TASK_DONE          + " NUMERIC default 0, " +
             TASK_TIME_DONE     + " TIMESTAMP" +
             ");";
@@ -63,7 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TRIGGER_TASK_CREATE =
             "CREATE TRIGGER "+ "create_task_timestamp_trigger AFTER INSERT ON " + TABLE_TASKS +
-                "BEGIN" +
-                "UPDATE " + TABLE_TASKS + "SET " + TASK_TIME_CREATED + " = DATETIME('NOW') WHERE rowid = new.rowid;" +
-                "END";
+                " BEGIN\n" +
+                "UPDATE " + TABLE_TASKS + " SET " + TASK_TIME_CREATED + " = DATETIME('NOW') WHERE rowid = new.rowid;" +
+                "\nEND";
 }
