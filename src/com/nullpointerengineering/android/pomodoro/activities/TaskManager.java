@@ -12,10 +12,14 @@ import android.widget.ListView;
 import android.widget.Toast;
 import com.google.inject.Inject;
 import com.nullpointerengineering.android.pomodoro.R;
+import com.nullpointerengineering.android.pomodoro.data.DatabaseConstants;
+import com.nullpointerengineering.android.pomodoro.data.DatabaseHelper;
 import com.nullpointerengineering.android.pomodoro.utilities.Eula;
 import roboguice.activity.RoboListActivity;
 
 public class TaskManager extends ListActivity {
+
+    private DatabaseHelper dbHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -67,7 +71,8 @@ public class TaskManager extends ListActivity {
             }
         });
 
-
+        dbHelper = new DatabaseHelper(this);
+        dbHelper.onCreate(dbHelper.getWritableDatabase());
     }
 
     //Activity launchers

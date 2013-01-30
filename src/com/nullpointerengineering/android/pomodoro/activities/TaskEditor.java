@@ -78,7 +78,7 @@ public class TaskEditor extends Activity {
 
     private void populateFields() {
 /*
-        taskId = this.getIntent().getExtras().getLong(TASKS_KEY_ID);
+        taskId = this.getIntent().getExtras().getLong(TASK_KEY_ID);
 
         if (taskId == 0) {
             priorityPicker.setCurrent(PRIORITY_MINIMUM);
@@ -104,7 +104,7 @@ public class TaskEditor extends Activity {
         Intent intent = this.getIntent();
         Bundle data = getIntent().getExtras();
 
-        data.putLong(TASKS_KEY_ID, taskId);
+        data.putLong(TASK_KEY_ID, taskId);
         intent.putExtras(data);
 */
     }
