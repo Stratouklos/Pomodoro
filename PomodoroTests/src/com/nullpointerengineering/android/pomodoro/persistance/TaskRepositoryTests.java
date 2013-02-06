@@ -1,13 +1,14 @@
-package com.nullpointerengineering.android.pomodoro.data;
+package com.nullpointerengineering.android.pomodoro.persistance;
 
 import android.database.CursorIndexOutOfBoundsException;
 import android.test.AndroidTestCase;
+import com.nullpointerengineering.android.pomodoro.persistance.data.Task;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
 import java.util.List;
 
-import static com.nullpointerengineering.android.pomodoro.data.DatabaseConstants.DATABASE_NAME;
+import static com.nullpointerengineering.android.pomodoro.persistance.DatabaseConstants.DATABASE_NAME;
 
 /**
  * Created with IntelliJ IDEA.

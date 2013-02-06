@@ -1,4 +1,4 @@
-package com.nullpointerengineering.android.pomodoro.data;
+package com.nullpointerengineering.android.pomodoro.persistance.data;
 
 import java.util.List;
 

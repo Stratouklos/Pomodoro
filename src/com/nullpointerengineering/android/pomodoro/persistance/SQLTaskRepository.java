@@ -1,15 +1,17 @@
-package com.nullpointerengineering.android.pomodoro.data;
+package com.nullpointerengineering.android.pomodoro.persistance;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import com.nullpointerengineering.android.pomodoro.persistance.data.Task;
+import com.nullpointerengineering.android.pomodoro.persistance.data.TaskRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.nullpointerengineering.android.pomodoro.data.DatabaseConstants.*;
+import static com.nullpointerengineering.android.pomodoro.persistance.DatabaseConstants.*;
 
 /**
  * Created with IntelliJ IDEA.
