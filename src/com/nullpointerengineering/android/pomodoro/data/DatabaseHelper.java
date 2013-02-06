@@ -64,6 +64,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TRIGGER_TASK_CREATE =
             "CREATE TRIGGER "+ "create_task_timestamp_trigger AFTER INSERT ON " + TABLE_TASKS +
                 " BEGIN\n" +
-                "UPDATE " + TABLE_TASKS + " SET " + TASK_TIME_CREATED + " = DATETIME('NOW') WHERE rowid = new.rowid;" +
+                "UPDATE " + TABLE_TASKS + " SET " + TASK_TIME_CREATED + " = STRFTIME('%s','now') WHERE rowid = new.rowid;" +
                 "\nEND";
 }
