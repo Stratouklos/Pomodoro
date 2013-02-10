@@ -1,4 +1,4 @@
-package com.nullpointerengineering.android.pomodoro.persistance;
+package com.nullpointerengineering.android.pomodoro.persistence.data;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,8 +31,8 @@ public class DatabaseConstants {
     public static final String TASK_ACTUAL = "actual";
     public static final String TASK_DONE = "done";
 
-    public static final String TASK_TIME_CREATED = "created_on";
-    public static final String TASK_TIME_DONE = "done_on";
+    public static final String TASK_CREATED_DATE = "created_on";
+    public static final String TASK_DONE_DATE = "done_on";
 
     /*******************
      * Pomodoros table *
