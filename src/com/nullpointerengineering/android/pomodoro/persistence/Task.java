@@ -1,4 +1,4 @@
-package com.nullpointerengineering.android.pomodoro.persistance.data;
+package com.nullpointerengineering.android.pomodoro.persistence;
 
 import org.joda.time.DateTime;
 
@@ -20,7 +20,7 @@ public class Task {
     private DateTime timeCreated;
     private DateTime timeDone;
 
-    public Task(long id, String title, int priority, int estimate, int actual, long timeCreated, long timeDone) {
+    protected Task(long id, String title, int priority, int estimate, int actual, long timeCreated, long timeDone) {
         this.id = id;
         this.title = title;
         this.priority = priority;

@@ -13,10 +13,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.TaskEditor"
-                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-                  android:windowSoftInputMode="adjustUnspecified"/>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="adjustUnspecified"/>
         <activity android:name=".activities.PreferencesEditor"
                   />
+        <provider
+            android:name=".persistence.data.TaskProvider"
+            android:authorities="com.nullpointerengineering.android.pomodoro.provider.task">
+        </provider>
     </application>
     <activity android:name=".activities.PreferencesEditor"
               android:label="Select Preferences"/>1

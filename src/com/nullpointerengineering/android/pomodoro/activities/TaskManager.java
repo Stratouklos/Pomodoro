@@ -2,24 +2,28 @@ package com.nullpointerengineering.android.pomodoro.activities;
 
 
 import android.app.ListActivity;
+import android.app.LoaderManager;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Toast;
-import com.google.inject.Inject;
+import android.widget.*;
 import com.nullpointerengineering.android.pomodoro.R;
-import com.nullpointerengineering.android.pomodoro.data.DatabaseConstants;
-import com.nullpointerengineering.android.pomodoro.data.DatabaseHelper;
+import com.nullpointerengineering.android.pomodoro.persistence.data.TaskCursorAdapter;
 import com.nullpointerengineering.android.pomodoro.utilities.Eula;
-import roboguice.activity.RoboListActivity;
 
-public class TaskManager extends ListActivity {
+import static com.nullpointerengineering.android.pomodoro.persistence.data.DatabaseConstants.TASK_ESTIMATE;
+import static com.nullpointerengineering.android.pomodoro.persistence.data.DatabaseConstants.TASK_PRIORITY;
+import static com.nullpointerengineering.android.pomodoro.persistence.data.DatabaseConstants.TASK_TITLE;
+import static com.nullpointerengineering.android.pomodoro.persistence.data.TaskProvider.*;
 
-    private DatabaseHelper dbHelper;
+public class TaskManager extends ListActivity implements   LoaderManager.LoaderCallbacks<Cursor>{
+
+    TaskCursorAdapter adapter;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -36,6 +40,18 @@ public class TaskManager extends ListActivity {
                 hello.show();
             }
         });
+
+        // Now create a custom cursor adapter and set it to display
+        TaskCursorAdapter adapter = new TaskCursorAdapter(this,
+                new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+                        editTaskActivity((Long) view.getTag());
+                    }
+                });
+        setListAdapter(adapter);
+
+        getLoaderManager().initLoader(0, null, this);
 
         //On clickers
         Button playButton = (Button) findViewById(R.id.PlayBtn);
@@ -71,10 +87,28 @@ public class TaskManager extends ListActivity {
             }
         });
 
-        dbHelper = new DatabaseHelper(this);
-        dbHelper.onCreate(dbHelper.getWritableDatabase());
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        String[] projection = {TASK_TITLE, TASK_ESTIMATE, TASK_PRIORITY};
+        return new CursorLoader(this, CONTENT_URI, projection, null, null,null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+        adapter.swapCursor(cursor);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> cursorLoader) {
+        adapter.swapCursor(null);
+    }
     //Activity launchers
     private void editTaskActivity(long id) {
         Intent i = new Intent(this, TaskEditor.class);
@@ -89,5 +123,6 @@ public class TaskManager extends ListActivity {
     private static final int    EDIT_ID             = Menu.FIRST;
     private static final int    DELETE_ID           = Menu.FIRST + 1;
     private static final int    CANCEL_ID           = Menu.FIRST + 2;
+
 
 }

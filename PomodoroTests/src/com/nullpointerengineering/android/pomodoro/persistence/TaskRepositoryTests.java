@@ -1,14 +1,9 @@
-package com.nullpointerengineering.android.pomodoro.persistance;
+package com.nullpointerengineering.android.pomodoro.persistence;
 
 import android.database.CursorIndexOutOfBoundsException;
 import android.test.AndroidTestCase;
-import com.nullpointerengineering.android.pomodoro.persistance.data.Task;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
-
-import java.util.List;
-
-import static com.nullpointerengineering.android.pomodoro.persistance.DatabaseConstants.DATABASE_NAME;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,22 +16,20 @@ import static com.nullpointerengineering.android.pomodoro.persistance.DatabaseCo
 
 public class TaskRepositoryTests extends AndroidTestCase {
 
-    private SQLTaskRepository repository;
+    private TaskRepository repository;
     private long taskId;
 
+    private static final Duration ONE_SECOND = new Duration(1000);
 
     @Override
     protected void setUp(){
-        repository = new SQLTaskRepository(getContext());
-        repository.open();
+        repository = new TaskRepository(getContext());
         taskId = repository.createTask("Test task",1,5).getId();
     }
 
     @Override
     protected void tearDown(){
         repository.deleteTask(taskId);
-        repository.close();
-        getContext().deleteDatabase(DATABASE_NAME);
     }
 
     public void testCreatedTask(){
@@ -50,22 +43,18 @@ public class TaskRepositoryTests extends AndroidTestCase {
 
         DateTime now = new DateTime();
         DateTime created = task.getTimeCreated();
+        Duration timePassed = new Duration(created, now);
 
-        assertTrue("" +task.getTimeCreated().getMillis() ,new Duration(created, now).isShorterThan(new Duration(10000)));
+        String msg = "Time created was: " +task.getTimeCreated().getMillis()
+                + "Now it's:" + System.currentTimeMillis();
+
+        assertTrue(msg, timePassed.isShorterThan(ONE_SECOND));
         assertFalse(task.isDone());
     }
 
     public void testDeleteTask(){
         boolean thrown = false;
-        repository.deleteTask(taskId);
-
-        try {
-            repository.findTaskById(taskId);
-        } catch (CursorIndexOutOfBoundsException e){
-            assertEquals("Index 0 requested, with a size of 0", e.getMessage());
-            thrown = true;
-        }
-        assertTrue(thrown);
+        assertEquals(1, repository.deleteTask(taskId));
     }
 
     public void testEditTask(){
@@ -92,8 +81,10 @@ public class TaskRepositoryTests extends AndroidTestCase {
 
         task = repository.findTaskById(taskId);
         assertTrue(task.isDone());
-        Duration actual = new Duration(task.getTimeDone(), new DateTime());
-        assertTrue(actual.isLongerThan(new Duration(1000)));
+        DateTime now = new DateTime();
+        DateTime timeDone = task.getTimeDone();
+        Duration timePassed= new Duration(timeDone, now);
+        assertTrue(timePassed.isShorterThan(ONE_SECOND));
     }
 
     public void testMarkDoneAndThenUndone(){
@@ -118,15 +109,4 @@ public class TaskRepositoryTests extends AndroidTestCase {
         task = repository.findTaskById(taskId);
         assertEquals(1, task.getActual());
     }
-
-    public void testGetAll() {
-        repository.createTask("Test 2", 2, 2);
-        repository.createTask("Test 3", 3, 3);
-        repository.createTask("Test 4", 4, 4);
-        repository.createTask("Test 5", 5, 5);
-        List<Task> tasks = repository.getAllTasks();
-
-        assertEquals(5,  tasks.size());
-    }
-
 }
