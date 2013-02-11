@@ -1,4 +1,4 @@
-package com.nullpointerengineering.android.pomodoro.persistence.data;
+package com.nullpointerengineering.android.pomodoro.persistence;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -9,7 +9,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import com.nullpointerengineering.android.pomodoro.R;
 
-import static com.nullpointerengineering.android.pomodoro.persistence.data.DatabaseConstants.*;
+import static com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants.*;
 
 /**
  * Created with IntelliJ IDEA.

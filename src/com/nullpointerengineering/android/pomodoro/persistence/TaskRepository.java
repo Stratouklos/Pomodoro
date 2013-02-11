@@ -3,9 +3,9 @@ package com.nullpointerengineering.android.pomodoro.persistence;
 import android.content.*;
 import android.database.Cursor;
 import android.net.Uri;
-import com.nullpointerengineering.android.pomodoro.persistence.data.TaskProvider;
+import com.nullpointerengineering.android.pomodoro.persistence.database.TaskProvider;
 
-import static com.nullpointerengineering.android.pomodoro.persistence.data.DatabaseConstants.*;
+import static com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants.*;
 
 /**
  * Created with IntelliJ IDEA.

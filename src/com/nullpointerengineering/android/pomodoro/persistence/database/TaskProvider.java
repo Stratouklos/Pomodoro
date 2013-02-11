@@ -1,4 +1,4 @@
-package com.nullpointerengineering.android.pomodoro.persistence.data;
+package com.nullpointerengineering.android.pomodoro.persistence.database;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -13,7 +13,7 @@ import android.text.TextUtils;
 
 import java.util.HashMap;
 
-import static com.nullpointerengineering.android.pomodoro.persistence.data.DatabaseConstants.*;
+import static com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants.*;
 
 /**
  * Created with IntelliJ IDEA.

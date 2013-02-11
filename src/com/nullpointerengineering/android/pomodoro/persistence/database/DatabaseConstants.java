@@ -1,4 +1,4 @@
-package com.nullpointerengineering.android.pomodoro.persistence.data;
+package com.nullpointerengineering.android.pomodoro.persistence.database;
 
 /**
  * Created by IntelliJ IDEA.

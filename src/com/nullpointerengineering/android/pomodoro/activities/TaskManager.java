@@ -12,11 +12,11 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.*;
 import com.nullpointerengineering.android.pomodoro.R;
-import com.nullpointerengineering.android.pomodoro.persistence.data.TaskCursorAdapter;
+import com.nullpointerengineering.android.pomodoro.persistence.TaskCursorAdapter;
 import com.nullpointerengineering.android.pomodoro.utilities.Eula;
 
-import static com.nullpointerengineering.android.pomodoro.persistence.data.DatabaseConstants.*;
-import static com.nullpointerengineering.android.pomodoro.persistence.data.TaskProvider.*;
+import static com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants.*;
+import static com.nullpointerengineering.android.pomodoro.persistence.database.TaskProvider.*;
 
 public class TaskManager extends ListActivity implements   LoaderManager.LoaderCallbacks<Cursor>{
 

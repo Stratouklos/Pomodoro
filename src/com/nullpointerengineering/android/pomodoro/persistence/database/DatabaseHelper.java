@@ -1,11 +1,11 @@
-package com.nullpointerengineering.android.pomodoro.persistence.data;
+package com.nullpointerengineering.android.pomodoro.persistence.database;
 
  import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import static com.nullpointerengineering.android.pomodoro.persistence.data.DatabaseConstants.*;
+import static com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants.*;
 
 /**
  * Created with IntelliJ IDEA.

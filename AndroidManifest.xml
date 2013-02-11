@@ -18,7 +18,7 @@
         <activity android:name=".activities.PreferencesEditor"
                   />
         <provider
-            android:name=".persistence.data.TaskProvider"
+            android:name=".persistence.database.TaskProvider"
             android:authorities="com.nullpointerengineering.android.pomodoro.provider.task">
         </provider>
     </application>
