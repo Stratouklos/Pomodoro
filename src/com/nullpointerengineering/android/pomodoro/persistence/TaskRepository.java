@@ -59,7 +59,8 @@ public class TaskRepository {
         taskValues.put(TASK_ACTUAL, task.getActual());
         taskValues.put(TASK_CREATED_DATE, task.getTimeCreated().getMillis());
         taskValues.put(TASK_DONE_DATE, task.getTimeDone().getMillis());
-        resolver.update(TaskProvider.CONTENT_URI, taskValues, TASK_KEY_ID + "=" + task.getId(), null);
+        Uri taskUri = ContentUris.withAppendedId(TaskProvider.CONTENT_ID_URI_BASE, task.getId());
+        resolver.update(taskUri, taskValues, null, null);
     }
 
     public int deleteTask(long id) {

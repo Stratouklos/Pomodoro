@@ -15,9 +15,7 @@ import com.nullpointerengineering.android.pomodoro.R;
 import com.nullpointerengineering.android.pomodoro.persistence.data.TaskCursorAdapter;
 import com.nullpointerengineering.android.pomodoro.utilities.Eula;
 
-import static com.nullpointerengineering.android.pomodoro.persistence.data.DatabaseConstants.TASK_ESTIMATE;
-import static com.nullpointerengineering.android.pomodoro.persistence.data.DatabaseConstants.TASK_PRIORITY;
-import static com.nullpointerengineering.android.pomodoro.persistence.data.DatabaseConstants.TASK_TITLE;
+import static com.nullpointerengineering.android.pomodoro.persistence.data.DatabaseConstants.*;
 import static com.nullpointerengineering.android.pomodoro.persistence.data.TaskProvider.*;
 
 public class TaskManager extends ListActivity implements   LoaderManager.LoaderCallbacks<Cursor>{
@@ -33,6 +31,19 @@ public class TaskManager extends ListActivity implements   LoaderManager.LoaderC
         eula.show(this);
         ListView list = getListView();
         registerForContextMenu(list);
+
+        // Now create a custom cursor adapter and set it to display
+        adapter = new TaskCursorAdapter(this,
+                new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+                        editTaskActivity((Long) view.getTag());
+                    }
+                });
+
+
+        setListAdapter(adapter);
+
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -40,16 +51,6 @@ public class TaskManager extends ListActivity implements   LoaderManager.LoaderC
                 hello.show();
             }
         });
-
-        // Now create a custom cursor adapter and set it to display
-        TaskCursorAdapter adapter = new TaskCursorAdapter(this,
-                new View.OnClickListener(){
-                    @Override
-                    public void onClick(View view) {
-                        editTaskActivity((Long) view.getTag());
-                    }
-                });
-        setListAdapter(adapter);
 
         getLoaderManager().initLoader(0, null, this);
 
@@ -96,8 +97,8 @@ public class TaskManager extends ListActivity implements   LoaderManager.LoaderC
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        String[] projection = {TASK_TITLE, TASK_ESTIMATE, TASK_PRIORITY};
-        return new CursorLoader(this, CONTENT_URI, projection, null, null,null);
+        String[] projection = { TASK_KEY_ID, TASK_TITLE, TASK_ESTIMATE, TASK_PRIORITY};
+        return new CursorLoader(TaskManager.this, CONTENT_URI, projection, null, null,null);
     }
 
     @Override

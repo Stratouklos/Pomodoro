@@ -226,16 +226,6 @@ public class TaskProvider extends ContentProvider {
 
     private static HashMap<String, String> tasksProjectionMap;
 
-    private static final String[] FIND_TASK_PROJECTION = new String[] {
-            TASK_KEY_ID,
-            TASK_TITLE,
-            TASK_PRIORITY,
-            TASK_ESTIMATE,
-            TASK_ACTUAL,
-            TASK_CREATED_DATE,
-            TASK_DONE_DATE
-    };
-
     private static final int TASKS = 1;
 
     private static final int TASK_ID = 2;
