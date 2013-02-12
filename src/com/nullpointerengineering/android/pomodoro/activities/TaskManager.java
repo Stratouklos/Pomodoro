@@ -9,10 +9,12 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import com.nullpointerengineering.android.pomodoro.R;
 import com.nullpointerengineering.android.pomodoro.persistence.TaskCursorAdapter;
+import com.nullpointerengineering.android.pomodoro.persistence.TaskRepository;
 import com.nullpointerengineering.android.pomodoro.utilities.Eula;
 
 import static com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants.*;
@@ -32,6 +34,12 @@ public class TaskManager extends ListActivity implements   LoaderManager.LoaderC
         ListView list = getListView();
         registerForContextMenu(list);
 
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                editTaskActivity((Long) view.getTag());
+            }
+        });
         // Now create a custom cursor adapter and set it to display
         adapter = new TaskCursorAdapter(this,
                 new View.OnClickListener(){
@@ -41,16 +49,15 @@ public class TaskManager extends ListActivity implements   LoaderManager.LoaderC
                     }
                 });
 
-
         setListAdapter(adapter);
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast hello = Toast.makeText(view.getContext(), "hello", 30);
                 hello.show();
             }
-        });
+        });  */
 
         getLoaderManager().initLoader(0, null, this);
 
@@ -59,7 +66,7 @@ public class TaskManager extends ListActivity implements   LoaderManager.LoaderC
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast hello = Toast.makeText(view.getContext(), "hello", 30);
+                Toast hello = Toast.makeText(view.getContext(), "Play", 30);
                 hello.show();
             }
         });
@@ -68,7 +75,7 @@ public class TaskManager extends ListActivity implements   LoaderManager.LoaderC
         addTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editTaskActivity(0);
+                editTaskActivity(TaskEditor.INVALID_ID);
             }
         });
 
@@ -91,13 +98,34 @@ public class TaskManager extends ListActivity implements   LoaderManager.LoaderC
     }
 
     @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch(item.getItemId()) {
+            case EDIT_ID:
+                editTaskActivity(info.id);
+                return true;
+            case DELETE_ID:
+                deleteTask(info.id);
+                return true;
+            case CANCEL_ID:
+                return true;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    private boolean deleteTask(long id) {
+        TaskRepository repository = new TaskRepository(this);
+        return (1 == repository.deleteTask(id));
+    }
+
+    @Override
     public void onResume(){
         super.onResume();
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        String[] projection = { TASK_KEY_ID, TASK_TITLE, TASK_ESTIMATE, TASK_PRIORITY};
+        String[] projection = { TASK_KEY_ID, TASK_TITLE, TASK_ESTIMATE, TASK_PRIORITY, TASK_DONE_DATE};
         return new CursorLoader(TaskManager.this, CONTENT_URI, projection, null, null,null);
     }
 
@@ -110,11 +138,12 @@ public class TaskManager extends ListActivity implements   LoaderManager.LoaderC
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
         adapter.swapCursor(null);
     }
+
     //Activity launchers
     private void editTaskActivity(long id) {
         Intent i = new Intent(this, TaskEditor.class);
         Bundle bundle = new Bundle();
-        bundle.putLong(TaskEditor.TASKS_KEY_ID, id);
+        bundle.putLong(TaskEditor.TASK_KEY_ID, id);
         i.putExtras(bundle);
         startActivityForResult(i, ACTIVITY_EDIT);
     }

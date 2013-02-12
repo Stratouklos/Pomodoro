@@ -1,6 +1,7 @@
 package com.nullpointerengineering.android.pomodoro.persistence;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import com.nullpointerengineering.android.pomodoro.R;
+import org.joda.time.DateTime;
 
 import static com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants.*;
 
@@ -23,28 +25,33 @@ public class TaskCursorAdapter extends SimpleCursorAdapter {
     private final LayoutInflater layoutInflater;
     private final View.OnClickListener listener;
     private final int layout;
-    private final int taskColor;
     private final String priorityAmple;
     private final String estimationAmple;
+    private final int doneColour;
+    private final int notDoneColour;
 
     public TaskCursorAdapter(Context context, View.OnClickListener clickListener) {
-        super(
-                context,
-                R.layout.tasks_row,
-                null,
-                new String[] {TASK_TITLE, TASK_ESTIMATE, TASK_PRIORITY},
-                new int[] {R.id.task_title, R.id.task_work_units,R.id.task_priority},
-                0
+        super( context,
+               R.layout.tasks_row,
+               null,
+               new String[] {TASK_TITLE, TASK_ESTIMATE, TASK_PRIORITY, TASK_DONE_DATE},
+               new int[] {R.id.task_title, R.id.task_work_units,R.id.task_priority},
+               0
         );
 
         // Cache the LayoutInflate to avoid asking for a new one each time.
         layoutInflater  = LayoutInflater.from(context);
         layout          = R.layout.tasks_row;
         listener        = clickListener;
-        taskColor       = context.getResources().getColor(R.color.Gold);
-        priorityAmple   = context.getResources().getString(R.string.priority)   + ": ";
-        estimationAmple = context.getResources().getString(R.string.work_units) + ": ";
-    }
+
+        //Eagerly load resources
+        Resources resources = context.getResources();
+        priorityAmple   = resources.getString(R.string.priority)   + ": ";
+        estimationAmple = resources.getString(R.string.work_units) + ": ";
+        doneColour = resources.getColor(R.color.MediumSlateBlue);
+        notDoneColour = resources.getColor(R.color.Gold);
+
+        }
 
     @Override
     public View getView(int position, View v, ViewGroup parent){
@@ -60,11 +67,13 @@ public class TaskCursorAdapter extends SimpleCursorAdapter {
         int titleColumn     = cursor.getColumnIndex(TASK_TITLE);
         int priorityColumn  = cursor.getColumnIndex(TASK_PRIORITY) ;
         int workUnitsColumn = cursor.getColumnIndex(TASK_ESTIMATE);
+        int timeDoneColumn  = cursor.getColumnIndex(TASK_DONE_DATE);
 
         //Data
         String title        = cursor.getString(titleColumn);
         String priority     = cursor.getString(priorityColumn);
         String workUnits    = cursor.getString(workUnitsColumn);
+        DateTime doneDate   = new DateTime(cursor.getLong(timeDoneColumn));
 
         //This is an object intentionally
         Long key = cursor.getLong(keyColumn);
@@ -77,6 +86,9 @@ public class TaskCursorAdapter extends SimpleCursorAdapter {
         v.setOnClickListener(listener);
         v.setClickable(true);
         v.setTag(key);
+
+        int taskColor = notDoneColour;
+        if (0 != doneDate.getMillis()) taskColor = doneColour;
 
         titleView.setText(title);
         titleView.setTextColor(taskColor);

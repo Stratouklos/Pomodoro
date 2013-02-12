@@ -29,7 +29,6 @@ public class DatabaseConstants {
     public static final String TASK_PRIORITY = "priority";
     public static final String TASK_ESTIMATE = "estimate";
     public static final String TASK_ACTUAL = "actual";
-    public static final String TASK_DONE = "done";
 
     public static final String TASK_CREATED_DATE = "created_on";
     public static final String TASK_DONE_DATE = "done_on";
