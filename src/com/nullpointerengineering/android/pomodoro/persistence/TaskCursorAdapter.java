@@ -3,9 +3,8 @@ package com.nullpointerengineering.android.pomodoro.persistence;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.graphics.Paint;
+import android.view.*;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import com.nullpointerengineering.android.pomodoro.R;
@@ -20,7 +19,7 @@ import static com.nullpointerengineering.android.pomodoro.persistence.database.D
  * Time: 3:50 AM
  * Custom cursor adapter to handle displaying the task list
  */
-public class TaskCursorAdapter extends SimpleCursorAdapter {
+public class TaskCursorAdapter extends SimpleCursorAdapter  {
 
     private final LayoutInflater layoutInflater;
     private final View.OnClickListener listener;
@@ -50,8 +49,7 @@ public class TaskCursorAdapter extends SimpleCursorAdapter {
         estimationAmple = resources.getString(R.string.work_units) + ": ";
         doneColour = resources.getColor(R.color.MediumSlateBlue);
         notDoneColour = resources.getColor(R.color.Gold);
-
-        }
+    }
 
     @Override
     public View getView(int position, View v, ViewGroup parent){
@@ -83,21 +81,37 @@ public class TaskCursorAdapter extends SimpleCursorAdapter {
         TextView priorityView   = (TextView) v.findViewById(R.id.task_priority);
         TextView estimationView = (TextView) v.findViewById(R.id.task_work_units);
 
+        titleView.setText(title);
+        priorityView.setText(priorityAmple + priority);
+        estimationView.setText(estimationAmple + workUnits);
+
         v.setOnClickListener(listener);
-        v.setClickable(true);
         v.setTag(key);
 
-        int taskColor = notDoneColour;
-        if (0 != doneDate.getMillis()) taskColor = doneColour;
+        if (EPOCH.equals(doneDate)){
+            //Task is not done yet so set the view accordingly
+            titleView.setTextColor(notDoneColour);
+            titleView.setPaintFlags(titleView.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+            priorityView.setTextColor(notDoneColour);
+            priorityView.setPaintFlags(priorityView.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+            estimationView.setTextColor(notDoneColour);
+            estimationView.setPaintFlags(estimationView.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
 
-        titleView.setText(title);
-        titleView.setTextColor(taskColor);
-        priorityView.setText(priorityAmple + priority);
-        priorityView.setTextColor(taskColor);
-        estimationView.setText(estimationAmple + workUnits);
-        estimationView.setTextColor(taskColor);
+            //Set the whole view clickable to edit the tasks.
+            v.setClickable(true);
+        } else {
+            //Set to gray and do strike through.
+            titleView.setTextColor(doneColour);
+            titleView.setPaintFlags(titleView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            priorityView.setTextColor(doneColour);
+            priorityView.setPaintFlags(priorityView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            estimationView.setTextColor(doneColour);
+            estimationView.setPaintFlags(estimationView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
+            v.setClickable(false);
+        }
         return v;
     }
 
+    private final static DateTime EPOCH = new DateTime(0);
 }

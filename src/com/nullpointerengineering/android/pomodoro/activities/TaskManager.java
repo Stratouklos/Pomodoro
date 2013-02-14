@@ -8,11 +8,13 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import com.nullpointerengineering.android.pomodoro.R;
+import com.nullpointerengineering.android.pomodoro.persistence.Task;
 import com.nullpointerengineering.android.pomodoro.persistence.TaskCursorAdapter;
 import com.nullpointerengineering.android.pomodoro.persistence.TaskRepository;
 import com.nullpointerengineering.android.pomodoro.utilities.Eula;
@@ -98,14 +100,29 @@ public class TaskManager extends ListActivity implements   LoaderManager.LoaderC
     }
 
     @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.add(0, DONE_ID, 1, R.string.menu_done);
+        menu.add(0, EDIT_ID, 1 , R.string.edit_note);
+        menu.add(0, DELETE_ID, 1, R.string.menu_delete);
+        menu.add(0, CANCEL_ID, 1, R.string.cancel);
+    }
+
+    @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        TaskRepository repository = new TaskRepository(this);
         switch(item.getItemId()) {
+            case DONE_ID:
+                Task task = repository.findTaskById(info.id);
+                task.setDone(!task.isDone());
+                repository.saveTask(task);
+                return true;
             case EDIT_ID:
                 editTaskActivity(info.id);
                 return true;
             case DELETE_ID:
-                deleteTask(info.id);
+                repository.deleteTask(info.id);
                 return true;
             case CANCEL_ID:
                 return true;
@@ -113,10 +130,6 @@ public class TaskManager extends ListActivity implements   LoaderManager.LoaderC
         return super.onContextItemSelected(item);
     }
 
-    private boolean deleteTask(long id) {
-        TaskRepository repository = new TaskRepository(this);
-        return (1 == repository.deleteTask(id));
-    }
 
     @Override
     public void onResume(){
@@ -148,11 +161,11 @@ public class TaskManager extends ListActivity implements   LoaderManager.LoaderC
         startActivityForResult(i, ACTIVITY_EDIT);
     }
 
-    private static final int    ACTIVITY_CREATE     = 0;
     private static final int    ACTIVITY_EDIT       = 1;
-    private static final int    EDIT_ID             = Menu.FIRST;
-    private static final int    DELETE_ID           = Menu.FIRST + 1;
-    private static final int    CANCEL_ID           = Menu.FIRST + 2;
+    private static final int    DONE_ID             = Menu.FIRST;
+    private static final int    EDIT_ID             = Menu.FIRST + 1;
+    private static final int    DELETE_ID           = Menu.FIRST + 2;
+    private static final int    CANCEL_ID           = Menu.FIRST + 3;
 
 
 }

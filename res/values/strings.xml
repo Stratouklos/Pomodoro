@@ -43,7 +43,7 @@
     <string name="add">New</string>
     <string name="menu_insert">Add Task</string>
     <string name="menu_delete">Delete Task</string>
-    <string name="menu_done">Task Done</string>
+    <string name="menu_done">Task Done/Undone</string>
     <string name="title">Task\'s title: </string>
     <string name="description">Description</string>
     <string name="priority">Priority</string>
