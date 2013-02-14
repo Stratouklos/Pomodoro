@@ -139,7 +139,7 @@ public class TaskManager extends ListActivity implements   LoaderManager.LoaderC
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         String[] projection = { TASK_KEY_ID, TASK_TITLE, TASK_ESTIMATE, TASK_PRIORITY, TASK_DONE_DATE};
-        return new CursorLoader(TaskManager.this, CONTENT_URI, projection, null, null,null);
+        return new CursorLoader(TaskManager.this, CONTENT_URI, projection, null, null, "done_on ASC, priority ASC");
     }
 
     @Override

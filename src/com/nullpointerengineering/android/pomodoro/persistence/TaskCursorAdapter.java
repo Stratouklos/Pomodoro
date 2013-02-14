@@ -85,7 +85,6 @@ public class TaskCursorAdapter extends SimpleCursorAdapter  {
         priorityView.setText(priorityAmple + priority);
         estimationView.setText(estimationAmple + workUnits);
 
-        v.setOnClickListener(listener);
         v.setTag(key);
 
         if (EPOCH.equals(doneDate)){
@@ -98,7 +97,7 @@ public class TaskCursorAdapter extends SimpleCursorAdapter  {
             estimationView.setPaintFlags(estimationView.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
 
             //Set the whole view clickable to edit the tasks.
-            v.setClickable(true);
+            v.setOnClickListener(listener);
         } else {
             //Set to gray and do strike through.
             titleView.setTextColor(doneColour);
@@ -108,7 +107,7 @@ public class TaskCursorAdapter extends SimpleCursorAdapter  {
             estimationView.setTextColor(doneColour);
             estimationView.setPaintFlags(estimationView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-            v.setClickable(false);
+            v.setOnClickListener(null);
         }
         return v;
     }
