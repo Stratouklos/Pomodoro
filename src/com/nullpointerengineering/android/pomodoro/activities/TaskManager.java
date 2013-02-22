@@ -1,13 +1,11 @@
 package com.nullpointerengineering.android.pomodoro.activities;
 
-
-import android.app.ListActivity;
-import android.app.LoaderManager;
-import android.content.CursorLoader;
+import android.app.*;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,16 +14,14 @@ import android.widget.*;
 import com.nullpointerengineering.android.pomodoro.R;
 import com.nullpointerengineering.android.pomodoro.persistence.Task;
 import com.nullpointerengineering.android.pomodoro.persistence.TaskCursorAdapter;
+import com.nullpointerengineering.android.pomodoro.persistence.TaskLoader;
 import com.nullpointerengineering.android.pomodoro.persistence.TaskRepository;
+import com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants;
 import com.nullpointerengineering.android.pomodoro.utilities.Eula;
 
-import static com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants.*;
-import static com.nullpointerengineering.android.pomodoro.persistence.database.TaskProvider.*;
+public class TaskManager extends ListActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
-public class TaskManager extends ListActivity implements   LoaderManager.LoaderCallbacks<Cursor>{
-
-    TaskCursorAdapter adapter;
-
+    private TaskLoader undoneTaskLoader;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -36,68 +32,69 @@ public class TaskManager extends ListActivity implements   LoaderManager.LoaderC
 
         ListView list = getListView();
         registerForContextMenu(list);
+        list.setOnItemClickListener(this);
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                editTaskActivity((Long) view.getTag());
-            }
-        });
         // Now create a custom cursor adapter and set it to display
-        adapter = new TaskCursorAdapter(this,
-                new View.OnClickListener(){
-                    @Override
-                    public void onClick(View view) {
-                        editTaskActivity((Long) view.getTag());
-                    }
-                });
-
+        TaskCursorAdapter adapter = new TaskCursorAdapter(this, new TaskListener());
         setListAdapter(adapter);
+        TaskLoader visibleTaskLoader = TaskLoader.getLoader(this);
+        visibleTaskLoader.setAdapter(adapter);
+        getLoaderManager().initLoader(VISIBLE_TASK_LOADER, null, visibleTaskLoader);
 
-        /*list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast hello = Toast.makeText(view.getContext(), "hello", 30);
-                hello.show();
-            }
-        });  */
-
-        getLoaderManager().initLoader(0, null, this);
+        undoneTaskLoader = TaskLoader.getLoader(this);
+        undoneTaskLoader.setSelection(DatabaseConstants.TASK_DONE_DATE + " == 0");
+        getLoaderManager().initLoader(UNDONE_TASK_LOADER, null, undoneTaskLoader);
 
         //On clickers
         Button playButton = (Button) findViewById(R.id.PlayBtn);
-        playButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast hello = Toast.makeText(view.getContext(), "Play", 30);
-                hello.show();
-            }
-        });
-
+        playButton.setOnClickListener(this);
         Button addTaskButton = (Button) findViewById(R.id.AddTaskBtn);
-        addTaskButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editTaskActivity(TaskEditor.INVALID_ID);
-            }
-        });
-
+        addTaskButton.setOnClickListener(this);
         Button preferencesButton = (Button) findViewById(R.id.PreferenceBtn);
-        preferencesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        preferencesButton.setOnClickListener(this);
+        Button statisticsButton = (Button) findViewById(R.id.PreferenceBtn);
+        statisticsButton.setOnClickListener(this);
+    }
+
+    private class TaskListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            editTaskActivity((Long) view.getTag());
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.PlayBtn:
+                AlertDialog.Builder dialog= new AlertDialog.Builder(this);
+                dialog.setTitle(getString(R.string.select_task));
+                final Cursor cursor = undoneTaskLoader.getCursor();
+                dialog.setCursor(cursor ,new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        cursor.moveToPosition(i);
+                        String title = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TASK_TITLE));
+                        Log.d("fuck", title);
+
+                        dialogInterface.dismiss();
+                    }
+                }, DatabaseConstants.TASK_TITLE);
+                dialog.show();
+                break;
+            case R.id.AddTaskBtn:
+                editTaskActivity(TaskEditor.INVALID_ID);
+                break;
+            case R.id.PreferenceBtn:
                 Intent i = new Intent(view.getContext(),PreferencesEditor.class);
                 startActivity(i);
-            }
-        });
-
-        ( findViewById(R.id.StatisticsBtn)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                break;
+            case R.id.StatisticsBtn:
                 //TODO implement
-            }
-        });
-
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown view!" + view.getTag());
+        }
     }
 
     @Override
@@ -131,26 +128,9 @@ public class TaskManager extends ListActivity implements   LoaderManager.LoaderC
         return super.onContextItemSelected(item);
     }
 
-
     @Override
-    public void onResume(){
-        super.onResume();
-    }
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        String[] projection = { TASK_KEY_ID, TASK_TITLE, TASK_ESTIMATE, TASK_PRIORITY, TASK_DONE_DATE};
-        return new CursorLoader(TaskManager.this, CONTENT_URI, projection, null, null, "done_on ASC, priority ASC");
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        adapter.swapCursor(cursor);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> cursorLoader) {
-        adapter.swapCursor(null);
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        editTaskActivity((Long) view.getTag());
     }
 
     //Activity launchers
@@ -167,6 +147,6 @@ public class TaskManager extends ListActivity implements   LoaderManager.LoaderC
     private static final int    EDIT_ID             = Menu.FIRST + 1;
     private static final int    DELETE_ID           = Menu.FIRST + 2;
     private static final int    CANCEL_ID           = Menu.FIRST + 3;
-
-
+    private static final int    VISIBLE_TASK_LOADER = 0;
+    private static final int    UNDONE_TASK_LOADER  = 1;
 }
