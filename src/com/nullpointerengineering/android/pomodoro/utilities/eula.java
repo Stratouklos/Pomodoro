@@ -20,19 +20,9 @@ import com.nullpointerengineering.android.pomodoro.R;
  */
 
 
-public class Eula {
+public final class Eula {
 
-    private PackageInfo getPackageInfo(Activity activity) {
-        PackageInfo pi = null;
-        try {
-            pi = activity.getPackageManager().getPackageInfo(activity.getPackageName(), PackageManager.GET_ACTIVITIES);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return pi;
-    }
-
-    public void show(final Activity activity) {
+    public static void show(final Activity activity) {
         PackageInfo versionInfo = getPackageInfo(activity);
 
         // the eulaKey changes every time you increment the version number in the AndroidManifest.xml
@@ -71,5 +61,15 @@ public class Eula {
                     });
             builder.create().show();
         }
+    }
+
+    private static PackageInfo getPackageInfo(Activity activity) {
+        PackageInfo pi = null;
+        try {
+            pi = activity.getPackageManager().getPackageInfo(activity.getPackageName(), PackageManager.GET_ACTIVITIES);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return pi;
     }
 }
