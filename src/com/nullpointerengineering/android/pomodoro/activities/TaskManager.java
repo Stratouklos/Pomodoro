@@ -26,7 +26,7 @@ public class TaskManager extends ListActivity implements View.OnClickListener, A
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pomodoro);
+        setContentView(R.layout.task_manager);
 
         Eula.show(this);
 
