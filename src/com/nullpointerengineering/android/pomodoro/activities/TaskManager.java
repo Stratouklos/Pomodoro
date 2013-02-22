@@ -31,8 +31,9 @@ public class TaskManager extends ListActivity implements   LoaderManager.LoaderC
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pomodoro);
-        Eula eula = new Eula();
-        eula.show(this);
+
+        Eula.show(this);
+
         ListView list = getListView();
         registerForContextMenu(list);
 
