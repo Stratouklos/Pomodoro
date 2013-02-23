@@ -14,6 +14,8 @@ import com.nullpointerengineering.android.pomodoro.persistence.Task;
 import com.nullpointerengineering.android.pomodoro.persistence.TaskRepository;
 import com.nullpointerengineering.android.pomodoro.widgets.NumberPicker;
 
+import static com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants.*;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Stratos
@@ -114,7 +116,6 @@ public class TaskEditor extends Activity {
         getIntent().putExtras(data);
     }
 
-    protected final static String TASK_KEY_ID       = "_ID";
     protected final static long   INVALID_ID        = -1;
 
     @SuppressWarnings("FieldCanBeLocal")

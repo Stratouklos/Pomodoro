@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +17,8 @@ import com.nullpointerengineering.android.pomodoro.persistence.TaskLoader;
 import com.nullpointerengineering.android.pomodoro.persistence.TaskRepository;
 import com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants;
 import com.nullpointerengineering.android.pomodoro.utilities.Eula;
+
+import static com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants.TASK_KEY_ID;
 
 public class TaskManager extends ListActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
@@ -74,9 +75,8 @@ public class TaskManager extends ListActivity implements View.OnClickListener, A
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         cursor.moveToPosition(i);
-                        String title = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TASK_TITLE));
-                        Log.d("fuck", title);
-
+                        long id = cursor.getLong(cursor.getColumnIndex(TASK_KEY_ID));
+                        pomodoroActivity(id);
                         dialogInterface.dismiss();
                     }
                 }, DatabaseConstants.TASK_TITLE);
@@ -137,10 +137,19 @@ public class TaskManager extends ListActivity implements View.OnClickListener, A
     private void editTaskActivity(long id) {
         Intent i = new Intent(this, TaskEditor.class);
         Bundle bundle = new Bundle();
-        bundle.putLong(TaskEditor.TASK_KEY_ID, id);
+        bundle.putLong(TASK_KEY_ID, id);
         i.putExtras(bundle);
         startActivityForResult(i, ACTIVITY_EDIT);
     }
+
+    private void pomodoroActivity(long id){
+        Intent i = new Intent(this, Pomodoro.class);
+        Bundle bundle = new Bundle();
+        bundle.putLong(TASK_KEY_ID, id);
+        i.putExtras(bundle);
+        startActivity(i);
+    }
+
 
     private static final int    ACTIVITY_EDIT       = 1;
     private static final int    DONE_ID             = Menu.FIRST;
