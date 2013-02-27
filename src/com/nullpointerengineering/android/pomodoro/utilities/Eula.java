@@ -22,12 +22,13 @@ import com.nullpointerengineering.android.pomodoro.R;
 
 public final class Eula {
 
+    protected  static final String EULA_PREFIX = "eula_";
+
     public static void show(final Activity activity) {
         PackageInfo versionInfo = getPackageInfo(activity);
 
-        // the eulaKey changes every time you increment the version number in the AndroidManifest.xml
-        String EULA_PREFIX = "eula_";
         final String eulaKey = EULA_PREFIX + versionInfo.versionCode;
+        // the eulaKey changes every time you increment the version number in the AndroidManifest.xml
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
         boolean hasBeenShown = prefs.getBoolean(eulaKey, false);
         if(!hasBeenShown){
@@ -52,7 +53,6 @@ public final class Eula {
                         }
                     })
                     .setNegativeButton(android.R.string.cancel, new Dialog.OnClickListener() {
-
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // Close the activity as they have declined the EULA
@@ -63,7 +63,7 @@ public final class Eula {
         }
     }
 
-    private static PackageInfo getPackageInfo(Activity activity) {
+    protected static PackageInfo getPackageInfo(Activity activity) {
         PackageInfo pi = null;
         try {
             pi = activity.getPackageManager().getPackageInfo(activity.getPackageName(), PackageManager.GET_ACTIVITIES);
