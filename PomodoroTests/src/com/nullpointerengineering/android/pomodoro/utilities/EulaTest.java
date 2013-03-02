@@ -35,7 +35,7 @@ import com.nullpointerengineering.android.pomodoro.activities.TaskManager;
 public class EulaTest extends ActivityInstrumentationTestCase2<TaskManager> {
 
     private static final int VERSION = 1;
-    private static final String EULA_KEY = Eula.EULA_PREFIX + VERSION;
+    public static final String EULA_KEY = Eula.EULA_PREFIX + VERSION;
 
     private String  eulaText;
 

@@ -16,7 +16,6 @@
 
 package com.nullpointerengineering.android.pomodoro.persistence;
 
-import android.database.CursorIndexOutOfBoundsException;
 import android.test.AndroidTestCase;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
@@ -69,7 +68,6 @@ public class TaskRepositoryTests extends AndroidTestCase {
     }
 
     public void testDeleteTask(){
-        boolean thrown = false;
         assertEquals(1, repository.deleteTask(taskId));
     }
 
