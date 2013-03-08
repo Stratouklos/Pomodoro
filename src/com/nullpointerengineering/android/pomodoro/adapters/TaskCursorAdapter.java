@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nullpointerengineering.android.pomodoro.persistence;
+package com.nullpointerengineering.android.pomodoro.adapters;
 
 import android.content.Context;
 import android.content.res.Resources;
