@@ -50,6 +50,7 @@ public class TimerService {
 
     private TimerService() {
         state = STOPPED;
+        if (D) Log.d(TAG, "state: stopped");
         listeners = new HashSet<TimerListener>();
         start = STARTING_DURATION;
     }
@@ -66,10 +67,12 @@ public class TimerService {
 
     public synchronized void registerListener(TimerListener listener) {
         listeners.add(listener);
+        if (D) Log.d(TAG, "Registering listener, active listeners: " + listeners.size());
     }
 
     public synchronized void deregisterListener(TimerListener listener) {
         listeners.remove(listener);
+        if (D) Log.d(TAG, "deRegistering listener, active listeners: " + listeners.size());
     }
 
     public synchronized void start() {
@@ -93,6 +96,7 @@ public class TimerService {
                     }
                 }, 0, DELAY);
                 state = COUNTING;
+                if (D) Log.d(TAG, "state: counting");
                 break;
             case COUNTING:
                 break;
@@ -104,13 +108,14 @@ public class TimerService {
     public synchronized void pause() {
         if (D) Log.d(TAG, "pause");
         state = PAUSED;
+        if (D) Log.d(TAG, "state: paused");
         timer.cancel();
-        timer.purge();
     }
 
     public synchronized void stop() {
         if (D) Log.d(TAG, "stop");
         state = STOPPED;
+        if (D) Log.d(TAG, "state: stopped");
         timer.cancel();
     }
 

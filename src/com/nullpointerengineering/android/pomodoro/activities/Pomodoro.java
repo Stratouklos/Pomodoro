@@ -18,6 +18,7 @@ package com.nullpointerengineering.android.pomodoro.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.nullpointerengineering.android.pomodoro.R;
@@ -49,11 +50,13 @@ public class Pomodoro extends Activity implements TimerListener {
     public void onCreate(Bundle savedInstanceState) {
         //Timer setup
         super.onCreate(savedInstanceState);
+        if (D) Log.d(TAG, "onStart");
         setContentView(R.layout.pomodoro);
 
         timerFace = (TimerFace) findViewById(R.id.timer_face);
         timerFace.setOnClickListener( new View.OnClickListener(){
             public void onClick(View v){
+                if (D) Log.d(TAG, "face clicked");
                 //Clicks on the view prompt the TimerController for action.
             }
         });
@@ -76,6 +79,7 @@ public class Pomodoro extends Activity implements TimerListener {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                if (D) Log.d(TAG, "Updating dial to " + time);
                 timerFace.setTime(time);
             }
         });
