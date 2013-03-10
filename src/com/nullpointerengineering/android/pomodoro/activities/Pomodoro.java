@@ -18,12 +18,10 @@ package com.nullpointerengineering.android.pomodoro.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.nullpointerengineering.android.pomodoro.R;
+import com.nullpointerengineering.android.pomodoro.TimerListener;
 import com.nullpointerengineering.android.pomodoro.persistence.Task;
 import com.nullpointerengineering.android.pomodoro.persistence.TaskRepository;
 import com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants;
@@ -39,13 +37,13 @@ import com.nullpointerengineering.android.pomodoro.widgets.TimerFace;
  */
 
 
-public class Pomodoro extends Activity {
+public class Pomodoro extends Activity implements TimerListener {
+
+    private static boolean D = true;
+    private static String  TAG = "Pomodoro_activity";
 
     private TimerFace timerFace;
-    private TextView  taskLabel;
-    private TextView  taskTitle;
-    private Task task;
-    private TimerService timerService;
+    private TimerService timer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,35 +57,34 @@ public class Pomodoro extends Activity {
                 //Clicks on the view prompt the TimerController for action.
             }
         });
-
-        taskLabel = (TextView) findViewById(R.id.task_label);
+        TextView taskLabel = (TextView) findViewById(R.id.task_label);
         taskLabel.setText(getString(R.string.working_on));
 
-        taskTitle = (TextView) findViewById(R.id.task_title);
+        TextView taskTitle = (TextView) findViewById(R.id.task_title);
         long taskId = getIntent().getExtras().getLong(DatabaseConstants.TASK_KEY_ID);
         TaskRepository repository = new TaskRepository(this);
-        task = repository.findTaskById(taskId);
-
+        Task task = repository.findTaskById(taskId);
         taskTitle.setText(task.getTitle());
 
-        timerService = new TimerService(this, handler);
-        timerService.setCount(500);
-        timerService.start();
+        timer = TimerService.getInstance();
+        timer.registerListener(this);
+        timer.start();
     }
 
-    private static final String TAG = "Pomodoro";
-    private final Handler handler = new Handler() {
-        @Override
-    public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    Log.d(TAG, "Received message!");
-                    timerFace.setTime(msg.arg1);
 
-                    break;
-                default:
-                    break;
+    public void timerUpdate(final int time){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                timerFace.setTime(time);
             }
-        }
-    };
+        });
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        timer.stop();
+        timer.deregisterListener(this);
+    }
 }

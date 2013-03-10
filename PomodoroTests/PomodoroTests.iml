@@ -41,6 +41,9 @@
     <orderEntry type="module" module-name="Pomodoro" exported="" scope="PROVIDED" />
     <orderEntry type="library" exported="" name="robotium-solo-3.6-javadoc" level="project" />
     <orderEntry type="library" exported="" scope="PROVIDED" name="joda-time-2.1-javadoc" level="project" />
+    <orderEntry type="library" name="dexmaker-1.0" level="project" />
+    <orderEntry type="library" name="dexmaker-mockito-1.0" level="project" />
+    <orderEntry type="library" name="mockito-all-1.9.5" level="project" />
   </component>
 </module>
 
