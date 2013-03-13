@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nullpointerengineering.android.pomodoro.activities;
+package com.nullpointerengineering.android.pomodoro.view.activities;
 
 import android.app.*;
 import android.content.DialogInterface;

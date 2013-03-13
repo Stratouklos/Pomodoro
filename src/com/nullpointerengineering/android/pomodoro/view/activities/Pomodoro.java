@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nullpointerengineering.android.pomodoro.activities;
+package com.nullpointerengineering.android.pomodoro.view.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -22,12 +22,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.nullpointerengineering.android.pomodoro.R;
-import com.nullpointerengineering.android.pomodoro.TimerListener;
+import com.nullpointerengineering.android.pomodoro.controllers.TimerListener;
 import com.nullpointerengineering.android.pomodoro.persistence.Task;
 import com.nullpointerengineering.android.pomodoro.persistence.TaskRepository;
 import com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants;
-import com.nullpointerengineering.android.pomodoro.services.TimerService;
-import com.nullpointerengineering.android.pomodoro.widgets.TimerFace;
+import com.nullpointerengineering.android.pomodoro.controllers.CountdownTimer;
+import com.nullpointerengineering.android.pomodoro.view.widgets.TimerFace;
 
 /**
  * Created with IntelliJ IDEA.
@@ -44,7 +44,7 @@ public class Pomodoro extends Activity implements TimerListener {
     private static String  TAG = "Pomodoro_activity";
 
     private TimerFace timerFace;
-    private TimerService timer;
+    private CountdownTimer timer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,7 @@ public class Pomodoro extends Activity implements TimerListener {
         Task task = repository.findTaskById(taskId);
         taskTitle.setText(task.getTitle());
 
-        timer = TimerService.getInstance();
+        timer = CountdownTimer.getInstance();
         timer.registerListener(this);
         timer.start();
     }

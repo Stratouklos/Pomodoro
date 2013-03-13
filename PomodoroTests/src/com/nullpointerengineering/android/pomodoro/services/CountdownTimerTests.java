@@ -1,10 +1,9 @@
 package com.nullpointerengineering.android.pomodoro.services;
 
-import android.os.Handler;
-import android.os.Message;
 import android.test.AndroidTestCase;
+import com.nullpointerengineering.android.pomodoro.controllers.CountdownTimer;
 
-import static com.nullpointerengineering.android.pomodoro.services.TimerService.State.*;
+import static com.nullpointerengineering.android.pomodoro.controllers.CountdownTimer.State.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,13 +12,13 @@ import static com.nullpointerengineering.android.pomodoro.services.TimerService.
  * Time: 10:57 PM
  * Testing the timer.
  */
-public class TimerServiceTests extends AndroidTestCase {
+public class CountdownTimerTests extends AndroidTestCase {
 
-    private TimerService timer;
+    private CountdownTimer timer;
 
     @Override
     protected void setUp(){
-        timer = TimerService.getInstance();
+        timer = CountdownTimer.getInstance();
     }
 
     public void testNewTimerState(){

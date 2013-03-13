@@ -23,7 +23,7 @@ import android.preference.PreferenceManager;
 import android.test.ActivityInstrumentationTestCase2;
 import com.jayway.android.robotium.solo.Solo;
 import com.nullpointerengineering.android.pomodoro.R;
-import com.nullpointerengineering.android.pomodoro.activities.TaskManager;
+import com.nullpointerengineering.android.pomodoro.view.activities.TaskManager;
 
 /**
  * Created with IntelliJ IDEA.

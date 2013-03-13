@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-package com.nullpointerengineering.android.pomodoro.services;
+package com.nullpointerengineering.android.pomodoro.controllers;
 
 import android.util.Log;
-import com.nullpointerengineering.android.pomodoro.TimerListener;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import static com.nullpointerengineering.android.pomodoro.services.TimerService.State.*;
+import static com.nullpointerengineering.android.pomodoro.controllers.CountdownTimer.State.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,9 +32,9 @@ import static com.nullpointerengineering.android.pomodoro.services.TimerService.
  * Time: 12:28 PM
  *
  */
-public class TimerService {
+public class CountdownTimer {
 
-    private static TimerService INSTANCE;
+    private static CountdownTimer INSTANCE;
     private static final String TAG = "TimerService";
     private static final boolean D = true;
 
@@ -48,15 +50,15 @@ public class TimerService {
         PAUSED,
     }
 
-    private TimerService() {
+    private CountdownTimer() {
         state = STOPPED;
         if (D) Log.d(TAG, "state: stopped");
         listeners = new HashSet<TimerListener>();
         start = STARTING_DURATION;
     }
 
-    public synchronized static TimerService getInstance(){
-        if (INSTANCE == null) INSTANCE = new TimerService();
+    public synchronized static CountdownTimer getInstance(){
+        if (INSTANCE == null) INSTANCE = new CountdownTimer();
         return INSTANCE;
     }
 

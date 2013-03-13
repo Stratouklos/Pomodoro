@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nullpointerengineering.android.pomodoro.activities;
+package com.nullpointerengineering.android.pomodoro.view.activities;
 
 import android.app.Activity;
 import android.graphics.PixelFormat;
@@ -28,7 +28,7 @@ import android.widget.EditText;
 import com.nullpointerengineering.android.pomodoro.R;
 import com.nullpointerengineering.android.pomodoro.persistence.Task;
 import com.nullpointerengineering.android.pomodoro.persistence.TaskRepository;
-import com.nullpointerengineering.android.pomodoro.widgets.NumberPicker;
+import com.nullpointerengineering.android.pomodoro.view.widgets.NumberPicker;
 
 import static com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants.*;
 

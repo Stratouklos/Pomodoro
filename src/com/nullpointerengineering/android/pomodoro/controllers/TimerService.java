@@ -14,21 +14,16 @@
  * limitations under the License.
  */
 
-package com.nullpointerengineering.android.pomodoro;
-
-import org.joda.time.Duration;
-import org.joda.time.Seconds;
+package com.nullpointerengineering.android.pomodoro.controllers;
 
 /**
  * Created with IntelliJ IDEA.
  * User: Stratos
- * Date: 09/03/13
- * Time: 9:58 PM
+ * Date: 23/02/13
+ * Time: 12:28 PM
  *
- * Objects implementing this interface care about timer updates.
  */
-public interface TimerListener {
+public class TimerService {
 
-    public void timerUpdate(int seconds);
 
 }
