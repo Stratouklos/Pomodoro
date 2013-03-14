@@ -33,7 +33,7 @@ import static com.nullpointerengineering.android.pomodoro.persistence.database.D
 
 public class TaskRepository {
 
-    ContentResolver resolver;
+    private ContentResolver resolver;
 
     public TaskRepository(Context context) {
         resolver = context.getContentResolver();
