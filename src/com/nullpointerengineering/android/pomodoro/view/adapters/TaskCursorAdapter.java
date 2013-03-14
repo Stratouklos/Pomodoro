@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nullpointerengineering.android.pomodoro.adapters;
+package com.nullpointerengineering.android.pomodoro.view.adapters;
 
 import android.content.Context;
 import android.content.res.Resources;
