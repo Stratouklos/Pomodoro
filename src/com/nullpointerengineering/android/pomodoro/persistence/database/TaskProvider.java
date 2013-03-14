@@ -40,7 +40,7 @@ import static com.nullpointerengineering.android.pomodoro.persistence.database.D
  */
 public class TaskProvider extends ContentProvider {
 
-    public static final String AUTHORITY = "com.nullpointerengineering.android.pomodoro.provider.task";
+    private DatabaseHelper databaseHelper;
 
     @Override
     public boolean onCreate() {
@@ -215,6 +215,7 @@ public class TaskProvider extends ContentProvider {
         return count;
     }
 
+    public static final String AUTHORITY = "com.nullpointerengineering.android.pomodoro.provider.task";
 
     private static final String SCHEME = "content://";
 
@@ -238,7 +239,7 @@ public class TaskProvider extends ContentProvider {
 
     public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.nullpointerengineering.task";
 
-    public static final String DEFAULT_SORT_ORDER = "priority ASC";
+    public static final String DEFAULT_SORT_ORDER = TASK_PRIORITY + " ASC";
 
     private static HashMap<String, String> tasksProjectionMap;
 
@@ -248,11 +249,8 @@ public class TaskProvider extends ContentProvider {
 
     private static final UriMatcher uriMatcher;
 
-    private DatabaseHelper databaseHelper;
-
     static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-
         uriMatcher.addURI(AUTHORITY, "tasks", TASKS);
         uriMatcher.addURI(AUTHORITY, "tasks/#", TASK_ID);
 
