@@ -23,7 +23,6 @@ package com.nullpointerengineering.android.pomodoro.persistence.database;
  * Time: 1:31 PM
  *
  * Constants declaration file.
- *
  */
 
 public class DatabaseConstants {
@@ -49,16 +48,17 @@ public class DatabaseConstants {
     public static final String TASK_CREATED_DATE = "created_on";
     public static final String TASK_DONE_DATE = "done_on";
 
-    /*******************
-     * Pomodoros table *
-     *******************/
+    /****************
+     * Events table *
+     ****************/
 
-    public static final String TABLE_POMODOROS  = "pomodoros";
+    public static final String TABLE_EVENTS = "events";
 
-    public static final String POMODORO_KEY_ID = "_id";
-    public static final String POMODORO_DURATION = "duration";
-    public static final String POMODORO_TIME_FINISHED = "finished_on";
-    public static final String POMODORO_COMPLETE = "complete";
+    public static final String EVENT_KEY_ID = "_id";
+    public static final String EVENT_DURATION = "duration";
+    public static final String EVENT_TYPE = "type";
+    public static final String EVENT_TIME_FINISHED = "finished_on";
+    public static final String EVENT_COMPLETE = "complete";
 
     //Database Version
     public static final int  DATABASE_VERSION = 1;

@@ -51,7 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.v(this.getClass().toString(), "Upgrading database from version" + oldVersion +
                 "to version" + newVersion + "all data are lost.");
         db.execSQL("DROP TABLE IF EXISTS  " + TABLE_TASKS);
-        db.execSQL("DROP TABLE IF EXISTS "  + TABLE_POMODOROS);
+        db.execSQL("DROP TABLE IF EXISTS "  + TABLE_EVENTS);
         onCreate(db);
     }
 
@@ -65,10 +65,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             TASK_DONE_DATE     + " INTEGER" +
             ");";
 
-    private static final String CREATE_POMODOROS_TABLE = "create table " +  TABLE_POMODOROS +" ("+
-            POMODORO_KEY_ID         + " INTEGER primary key autoincrement" + ", " +
-            POMODORO_DURATION       + " INTEGER, " +
-            POMODORO_TIME_FINISHED  + " INTEGER default 0, " +
-            POMODORO_COMPLETE       + " INTEGER default 0" +
+    private static final String CREATE_POMODOROS_TABLE = "create table " +  TABLE_EVENTS +" ("+
+            EVENT_KEY_ID         + " INTEGER primary key autoincrement" + ", " +
+            EVENT_DURATION       + " INTEGER, " +
+            EVENT_TYPE           + " TEXT not null" +
+            EVENT_TIME_FINISHED  + " INTEGER default 0, " +
+            EVENT_COMPLETE       + " INTEGER default 0" +
             ");";
 }
