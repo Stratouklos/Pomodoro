@@ -49,8 +49,7 @@ public class TaskProvider extends ContentProvider {
     }
 
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection,
-                        String[] selectionArgs, String sortOrder) {
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables(TABLE_TASKS);
 
@@ -60,10 +59,7 @@ public class TaskProvider extends ContentProvider {
                 break;
             case TASK_ID:
                 queryBuilder.setProjectionMap(tasksProjectionMap);
-                queryBuilder.appendWhere(
-                        TASK_KEY_ID +
-                        "=" +
-                        uri.getPathSegments().get(TASK_ID_PATH_POSITION));
+                queryBuilder.appendWhere( TASK_KEY_ID + "=" + uri.getPathSegments().get(TASK_ID_PATH_POSITION));
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
@@ -75,8 +71,7 @@ public class TaskProvider extends ContentProvider {
         } else orderBy = sortOrder;
 
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
-        Cursor cursor = queryBuilder.query(
-                db, projection, selection, selectionArgs, null, null, orderBy );
+        Cursor cursor = queryBuilder.query( db, projection, selection, selectionArgs, null, null, orderBy );
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;
     }
@@ -122,11 +117,7 @@ public class TaskProvider extends ContentProvider {
 
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
-        long rowId = db.insert(
-                TABLE_TASKS,
-                null,
-                values
-        );
+        long rowId = db.insert( TABLE_TASKS, null, values );
 
         if (rowId > 0 ) {
             Uri taskUri = ContentUris.withAppendedId(CONTENT_ID_URI_BASE, rowId);
@@ -145,27 +136,16 @@ public class TaskProvider extends ContentProvider {
 
         switch (uriMatcher.match(uri)) {
             case TASKS:
-                count = db.delete(
-                        TABLE_TASKS,
-                        where,
-                        whereArgs
-                );
+                count = db.delete( TABLE_TASKS, where, whereArgs );
                 break;
             case TASK_ID:
-                finalWhere =
-                        TASK_KEY_ID +
-                        " = " +
-                        uri.getPathSegments().get(TASK_ID_PATH_POSITION)
-                ;
+                finalWhere = TASK_KEY_ID + " = " + uri.getPathSegments().get(TASK_ID_PATH_POSITION);
+
                 if (where != null) {
                     finalWhere = finalWhere + " AND " + where;
                 }
 
-                count = db.delete(
-                        TABLE_TASKS,
-                        finalWhere,
-                        whereArgs
-                );
+                count = db.delete( TABLE_TASKS, finalWhere, whereArgs );
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
@@ -182,31 +162,16 @@ public class TaskProvider extends ContentProvider {
 
         switch (uriMatcher.match(uri)) {
             case TASKS:
-
-                count = db.update(
-                        TABLE_TASKS,
-                        values,
-                        where,
-                        whereArgs)
-                ;
+                count = db.update( TABLE_TASKS, values, where, whereArgs);
                 break;
             case TASK_ID:
-                finalWhere =
-                        TASK_KEY_ID +
-                        " = " +
-                        uri.getPathSegments().get(TASK_ID_PATH_POSITION)
-                ;
+                finalWhere = TASK_KEY_ID + " = " + uri.getPathSegments().get(TASK_ID_PATH_POSITION);
 
                 if (where !=null) {
                     finalWhere = finalWhere + " AND " + where;
                 }
 
-                count = db.update(
-                        TABLE_TASKS,
-                        values,
-                        finalWhere,
-                        whereArgs
-                );
+                count = db.update( TABLE_TASKS, values, finalWhere, whereArgs );
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
@@ -227,6 +192,7 @@ public class TaskProvider extends ContentProvider {
 
     public static final Uri CONTENT_ID_URI_BASE = Uri.parse(SCHEME + AUTHORITY + PATH_TASK_ID);
 
+    @SuppressWarnings("UnusedDeclaration")
     public static final Uri CONTENT_ID_URI_PATTERN = Uri.parse(SCHEME + AUTHORITY + PATH_TASK_ID + "/#");
 
     public static final int TASK_ID_PATH_POSITION = 1;
