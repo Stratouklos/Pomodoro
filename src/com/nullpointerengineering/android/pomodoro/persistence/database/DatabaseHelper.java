@@ -43,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.v( this.getClass().toString(), "Creating the tables");
         Log.v(this.getClass().toString(), CREATE_TASKS_TABLE);
         db.execSQL(CREATE_TASKS_TABLE);
-        db.execSQL(CREATE_POMODOROS_TABLE);
+        db.execSQL(CREATE_EVENTS_TABLE);
     }
 
     @Override
@@ -65,10 +65,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             TASK_DONE_DATE     + " INTEGER" +
             ");";
 
-    private static final String CREATE_POMODOROS_TABLE = "create table " +  TABLE_EVENTS +" ("+
-            EVENT_KEY_ID         + " INTEGER primary key autoincrement" + ", " +
+    private static final String CREATE_EVENTS_TABLE = "create table " +  TABLE_EVENTS +" ("+
+            EVENT_KEY_ID         + " INTEGER primary key autoincrement, " +
             EVENT_DURATION       + " INTEGER, " +
-            EVENT_TYPE           + " TEXT not null" +
+            EVENT_TYPE           + " TEXT not null, " +
             EVENT_TIME_FINISHED  + " INTEGER default 0, " +
             EVENT_COMPLETE       + " INTEGER default 0" +
             ");";

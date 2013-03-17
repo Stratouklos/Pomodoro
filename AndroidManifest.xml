@@ -25,6 +25,10 @@
             android:name=".persistence.database.TaskProvider"
             android:authorities="com.nullpointerengineering.android.pomodoro.provider.task">
         </provider>
+        <provider
+            android:name=".persistence.database.EventProvider"
+            android:authorities="com.nullpointerengineering.android.pomodoro.provider.event">
+        </provider>
         <activity
             android:name=".view.activities.PreferencesEditor"
             android:label="Select Preferences"/>
