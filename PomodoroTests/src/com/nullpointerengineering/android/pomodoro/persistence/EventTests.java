@@ -17,6 +17,7 @@
 package com.nullpointerengineering.android.pomodoro.persistence;
 
 import android.test.AndroidTestCase;
+import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
 import static com.nullpointerengineering.android.pomodoro.persistence.Event.Type.*;
@@ -93,6 +94,13 @@ public class EventTests extends AndroidTestCase {
         assertNotNull(caught);
         assertSame(expected.getClass(), caught.getClass());
         assertEquals(expected.getMessage(), caught.getMessage());
+    }
+
+    public void testCreatedOn() {
+        long millis = System.currentTimeMillis();
+        DateTime expected = new DateTime(millis * 1000);
+        Event event = new Event(0, millis, "pomodoro", 1000, 1000);
+        assertEquals(expected, event.getTimeCreated());
     }
 
     public void testNegativeCreatedOn() {
