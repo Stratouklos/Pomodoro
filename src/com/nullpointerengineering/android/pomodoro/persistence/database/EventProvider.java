@@ -106,16 +106,16 @@ public class EventProvider extends ContentProvider {
             values.put(EVENT_TYPE, "pomodoro");
         }
 
-        if (!values.containsKey(EVENT_DURATION)) {
-            values.put(EVENT_DURATION, 0);
+        if (!values.containsKey(EVENT_ACTUAL_DURATION)) {
+            values.put(EVENT_ACTUAL_DURATION, 0);
         }
 
-        if (!values.containsKey(EVENT_TIME_FINISHED)) {
-            values.put(EVENT_TIME_FINISHED, 0);
+        if (!values.containsKey(EVENT_TIME_STARTED)) {
+            values.put(EVENT_TIME_STARTED, 0);
         }
 
-        if (!values.containsKey(EVENT_COMPLETE)) {
-            values.put(EVENT_COMPLETE, 0);
+        if (!values.containsKey(EVENT_TOTAL_DURATION)) {
+            values.put(EVENT_TOTAL_DURATION, 0);
         }
 
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
@@ -206,7 +206,7 @@ public class EventProvider extends ContentProvider {
 
     public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.nullpointerengineering.event";
 
-    public static final String DEFAULT_SORT_ORDER = EVENT_TIME_FINISHED + " DESC";
+    public static final String DEFAULT_SORT_ORDER = EVENT_TIME_STARTED + " DESC";
 
     private static HashMap<String, String> eventsProjectionMap;
 
@@ -223,9 +223,9 @@ public class EventProvider extends ContentProvider {
 
         eventsProjectionMap = new HashMap<String, String>();
         eventsProjectionMap.put(EVENT_KEY_ID, EVENT_KEY_ID);
-        eventsProjectionMap.put(EVENT_DURATION, EVENT_DURATION);
+        eventsProjectionMap.put(EVENT_ACTUAL_DURATION, EVENT_ACTUAL_DURATION);
         eventsProjectionMap.put(EVENT_TYPE, EVENT_TYPE);
-        eventsProjectionMap.put(EVENT_TIME_FINISHED, EVENT_TIME_FINISHED);
-        eventsProjectionMap.put(EVENT_COMPLETE, EVENT_COMPLETE);
+        eventsProjectionMap.put(EVENT_TIME_STARTED, EVENT_TIME_STARTED);
+        eventsProjectionMap.put(EVENT_TOTAL_DURATION, EVENT_TOTAL_DURATION);
     }
 }

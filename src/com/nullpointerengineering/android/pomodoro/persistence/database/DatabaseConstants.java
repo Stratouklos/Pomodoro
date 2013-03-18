@@ -55,10 +55,10 @@ public class DatabaseConstants {
     public static final String TABLE_EVENTS = "events";
 
     public static final String EVENT_KEY_ID = "_id";
-    public static final String EVENT_DURATION = "duration";
     public static final String EVENT_TYPE = "type";
-    public static final String EVENT_TIME_FINISHED = "finished_on";
-    public static final String EVENT_COMPLETE = "complete";
+    public static final String EVENT_ACTUAL_DURATION = "actual_duration";
+    public static final String EVENT_TOTAL_DURATION = "total_duration";
+    public static final String EVENT_TIME_STARTED = "started_on";
 
     //Database Version
     public static final int  DATABASE_VERSION = 1;

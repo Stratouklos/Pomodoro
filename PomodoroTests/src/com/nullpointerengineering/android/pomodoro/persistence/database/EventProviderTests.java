@@ -36,17 +36,17 @@ public class EventProviderTests extends AndroidTestCase {
 
     private final static int KEY_ID_INDEX = 0;
     private final static int TYPE_INDEX = 1;
-    private final static int TIME_FINISHED_INDEX = 2;
-    private final static int DURATION_INDEX = 3;
-    private final static int COMPLETE_INDEX = 4;
+    private final static int TIME_STARTED_INDEX = 2;
+    private final static int ACTUAL_DURATION_INDEX = 3;
+    private final static int TOTAL_DURATION_INDEX = 4;
     private final static String[] PROJECTION;
     static  {
         PROJECTION = new String[5];
         PROJECTION[KEY_ID_INDEX] = EVENT_KEY_ID;
         PROJECTION[TYPE_INDEX] = EVENT_TYPE;
-        PROJECTION[TIME_FINISHED_INDEX] = EVENT_TIME_FINISHED;
-        PROJECTION[DURATION_INDEX] = EVENT_DURATION;
-        PROJECTION[COMPLETE_INDEX] = EVENT_COMPLETE;
+        PROJECTION[TIME_STARTED_INDEX] = EVENT_TIME_STARTED;
+        PROJECTION[ACTUAL_DURATION_INDEX] = EVENT_ACTUAL_DURATION;
+        PROJECTION[TOTAL_DURATION_INDEX] = EVENT_TOTAL_DURATION;
     }
 
     private ContentResolver resolver;
@@ -66,9 +66,9 @@ public class EventProviderTests extends AndroidTestCase {
     private long createTestEvent() {
         ContentValues eventValues = new ContentValues();
         eventValues.put(DatabaseConstants.EVENT_TYPE, "pomodoro");
-        eventValues.put(DatabaseConstants.EVENT_TIME_FINISHED, System.currentTimeMillis());
-        eventValues.put(DatabaseConstants.EVENT_COMPLETE, 1);
-        eventValues.put(DatabaseConstants.EVENT_DURATION, 25 * 60 );
+        eventValues.put(DatabaseConstants.EVENT_TIME_STARTED, System.currentTimeMillis());
+        eventValues.put(DatabaseConstants.EVENT_TOTAL_DURATION, 25 * 60 * 1000);
+        eventValues.put(DatabaseConstants.EVENT_ACTUAL_DURATION, 25 * 60 * 1000 );
         Uri uri = resolver.insert(EventProvider.CONTENT_URI, eventValues);
         return Long.parseLong(uri.getPathSegments().get(EventProvider.EVENT_ID_PATH_POSITION));
     }
@@ -104,7 +104,7 @@ public class EventProviderTests extends AndroidTestCase {
         Cursor cursor = resolver.query(eventUri, PROJECTION, null, null, null);
         cursor.moveToFirst();
         assertEquals("Value that should be updated didn't","break", cursor.getString(TYPE_INDEX));
-        assertEquals("Value that shouldn't be updated did", 25 * 60 , cursor.getInt(DURATION_INDEX));
+        assertEquals("Value that shouldn't be updated did", 25 * 60 *  1000, cursor.getInt(ACTUAL_DURATION_INDEX));
     }
 
     //DELETE

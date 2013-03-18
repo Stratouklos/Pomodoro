@@ -67,9 +67,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String CREATE_EVENTS_TABLE = "create table " +  TABLE_EVENTS +" ("+
             EVENT_KEY_ID         + " INTEGER primary key autoincrement, " +
-            EVENT_DURATION       + " INTEGER, " +
             EVENT_TYPE           + " TEXT not null, " +
-            EVENT_TIME_FINISHED  + " INTEGER default 0, " +
-            EVENT_COMPLETE       + " INTEGER default 0" +
+            EVENT_TIME_STARTED   + " INTEGER default 0, " +
+            EVENT_ACTUAL_DURATION + " INTEGER default 0, " +
+            EVENT_TOTAL_DURATION  + " INTEGER default 0" +
             ");";
 }
