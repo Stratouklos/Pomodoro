@@ -36,7 +36,7 @@ public class Task {
     private DateTime timeCreated;
     private DateTime timeDone;
 
-    protected Task(long id, String title, int priority, int estimate, int actual, long timeCreated, long timeDone) {
+    Task(long id, String title, int priority, int estimate, int actual, long timeCreated, long timeDone) {
         this.id = id;
         this.title = title;
         this.priority = priority;
