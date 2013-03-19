@@ -28,7 +28,7 @@ import static com.nullpointerengineering.android.pomodoro.persistence.database.D
  * User: Stratos
  * Date: 27/01/13
  * Time: 6:49 PM
- * Data access abstraction that queries the correct content resolvers for data and provides a persistence API to
+ * Task repository backed by a content provider
  */
 
 public class TaskRepository {
