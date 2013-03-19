@@ -22,6 +22,7 @@ import android.net.Uri;
 import com.nullpointerengineering.android.pomodoro.persistence.database.TaskProvider;
 
 import static com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants.*;
+import static com.nullpointerengineering.android.pomodoro.persistence.database.TaskProvider.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -44,15 +45,15 @@ public class TaskRepository {
         taskValues.put(TASK_TITLE, title);
         taskValues.put(TASK_PRIORITY, priority);
         taskValues.put(TASK_ESTIMATE, estimate);
-        Uri uri = resolver.insert(TaskProvider.CONTENT_URI, taskValues);
+        Uri uri = resolver.insert(CONTENT_URI, taskValues);
 
-        long id = Long.parseLong(uri.getPathSegments().get(TaskProvider.TASK_ID_PATH_POSITION));
+        long id = Long.parseLong(uri.getPathSegments().get(TASK_ID_PATH_POSITION));
 
         return findTaskById(id);
     }
 
     public Task findTaskById(long id) {
-        Uri taskUri = TaskProvider.CONTENT_ID_URI_BASE;
+        Uri taskUri = CONTENT_ID_URI_BASE;
         String[] projection = {
                 TASK_KEY_ID,
                 TASK_TITLE,
@@ -75,12 +76,12 @@ public class TaskRepository {
         taskValues.put(TASK_ACTUAL, task.getActual());
         taskValues.put(TASK_CREATED_DATE, task.getTimeCreated().getMillis());
         taskValues.put(TASK_DONE_DATE, task.getTimeDone().getMillis());
-        Uri taskUri = ContentUris.withAppendedId(TaskProvider.CONTENT_ID_URI_BASE, task.getId());
+        Uri taskUri = ContentUris.withAppendedId(CONTENT_ID_URI_BASE, task.getId());
         resolver.update(taskUri, taskValues, null, null);
     }
 
     public int deleteTask(long id) {
-        Uri taskUri = ContentUris.withAppendedId(TaskProvider.CONTENT_ID_URI_BASE, id);
+        Uri taskUri = ContentUris.withAppendedId(CONTENT_ID_URI_BASE, id);
         return resolver.delete(taskUri, null, null);
     }
 
