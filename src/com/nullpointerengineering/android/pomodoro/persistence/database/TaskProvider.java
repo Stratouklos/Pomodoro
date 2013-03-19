@@ -26,6 +26,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
+import org.joda.time.Instant;
 
 import java.util.HashMap;
 
@@ -112,7 +113,7 @@ public class TaskProvider extends ContentProvider {
         }
 
         if (!values.containsKey(TASK_CREATED_DATE)){
-            values.put(TASK_CREATED_DATE, System.currentTimeMillis());
+            values.put(TASK_CREATED_DATE, Instant.now().getMillis());
         }
 
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
