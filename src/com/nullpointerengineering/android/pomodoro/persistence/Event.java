@@ -38,6 +38,17 @@ public class Event {
         POMODORO,
         BREAK;
 
+        public String toString() {
+            switch (this) {
+                case POMODORO:
+                    return "pomodoro";
+                case BREAK:
+                    return "break";
+                default:
+                    return "pomodoro";
+            }
+        }
+
         private static Type getType(String typeName){
             if ( typeName.toLowerCase().equals("pomodoro")) {
                 return POMODORO;
