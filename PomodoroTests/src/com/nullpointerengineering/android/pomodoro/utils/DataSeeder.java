@@ -20,8 +20,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseHelper;
-
-import java.util.List;
+import junit.framework.Assert;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,50 +29,35 @@ import java.util.List;
  * Time: 8:44 PM
  * Seeding utility class for testing
  */
-public class Seed {
+public class DataSeeder {
 
-    private Context context;
+    private final Context context;
     private String table;
-    private String[] projection;
 
-    private static final Seed INSTANCE = new Seed();
-
-    private Seed() {
+    private DataSeeder(Context context) {
+        this.context = context;
     }
 
-    public static Seed data() {
-        return INSTANCE;
+    public static DataSeeder seed(Context context) {
+        return new DataSeeder(context);
     }
 
-    public Seed basedOn(Context context) {
-        INSTANCE.context = context;
-        return INSTANCE;
+    public DataSeeder onTable(String table) {
+        this.table = table;
+        return this;
     }
 
-
-    public Seed table(String table) {
-        INSTANCE.table = table;
-        return INSTANCE;
-    }
-
-    public Seed withColumns(String[] projection) {
-        INSTANCE.projection = projection;
-        return INSTANCE;
-    }
-
-    public Seed insert(List<ContentValues> values) {
+    public DataSeeder insertValues(ContentValues values) {
         SQLiteDatabase db = new DatabaseHelper(context).getWritableDatabase();
-        for (ContentValues value : values) {
-            db.insert(table, null, value);
-        }
+        db.insertOrThrow(table, null, values);
         db.close();
-        return INSTANCE;
+        return this;
     }
 
-    public Seed clear() {
+    public DataSeeder clear() {
         SQLiteDatabase db = new DatabaseHelper(context).getWritableDatabase();
         db.execSQL("DELETE from " + table);
         db.close();
-        return INSTANCE;
+        return this;
     }
 }

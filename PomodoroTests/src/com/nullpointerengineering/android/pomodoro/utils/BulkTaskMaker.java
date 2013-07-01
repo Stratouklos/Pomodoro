@@ -17,10 +17,17 @@
 package com.nullpointerengineering.android.pomodoro.utils;
 
 import android.content.ContentValues;
+import android.content.Context;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Predicates;
 import com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import static com.google.common.base.Preconditions.*;
+import static com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants.*;
+import static java.lang.System.currentTimeMillis;
 
 /**
  * Created with IntelliJ IDEA.
@@ -32,23 +39,28 @@ import java.util.List;
 
 public class BulkTaskMaker {
 
-    public static List<ContentValues> taskValues(int howMany, boolean done) {
+    DataSeeder seeder;
+
+    public BulkTaskMaker(Context context) {
+        seeder = DataSeeder.seed(context);
+        seeder.onTable("tasks").clear();
+    }
+
+    public void taskValues(int howMany, boolean done) {
+        checkNotNull(seeder);
         String doneness  = done ? "Done" : "Undone";
-
-        List<ContentValues> valuesList = new LinkedList<ContentValues>();
-
         for (int i = 0; i < howMany; i++) {
             ContentValues values = new ContentValues();
-            values.put(DatabaseConstants.TASK_TITLE,  doneness + " test task " + i );
-            values.put(DatabaseConstants.TASK_PRIORITY, i + 1 % 5);
-            values.put(DatabaseConstants.TASK_ESTIMATE, i + 1 % 5);
+            values.put(TASK_TITLE,  doneness + " test task " + i );
+            values.put(TASK_PRIORITY, i + 1 % 5);
+            values.put(TASK_ESTIMATE, i + 1 % 5);
+            values.put(TASK_CREATED_DATE, currentTimeMillis());
             if (done) {
-                values.put(DatabaseConstants.TASK_DONE_DATE, System.currentTimeMillis() - i * (1000 * 60 * 60 ));
-                values.put(DatabaseConstants.TASK_ACTUAL, i + 1 % 10);
+                values.put(TASK_DONE_DATE, currentTimeMillis() - i * (1000 * 60 * 60 ));
+                values.put(TASK_ACTUAL, i + 1 % 10);
             }
-            valuesList.add(values);
+            seeder.insertValues(values);
         }
-        return valuesList;
     }
 
 

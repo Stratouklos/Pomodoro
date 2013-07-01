@@ -14,16 +14,23 @@
  * limitations under the License.
  */
 
-package com.nullpointerengineering.android.pomodoro.view.activities;
+package com.nullpointerengineering.android.pomodoro.functional;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.preference.PreferenceManager;
 import android.test.ActivityInstrumentationTestCase2;
 import com.jayway.android.robotium.solo.Solo;
+import com.nullpointerengineering.android.pomodoro.persistence.TaskRepository;
 import com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants;
+import com.nullpointerengineering.android.pomodoro.tests.R;
 import com.nullpointerengineering.android.pomodoro.utils.BulkTaskMaker;
-import com.nullpointerengineering.android.pomodoro.utils.Seed;
+import com.nullpointerengineering.android.pomodoro.utils.DataSeeder;
+import com.nullpointerengineering.android.pomodoro.view.activities.TaskEditor;
+import com.nullpointerengineering.android.pomodoro.view.activities.TaskManager;
+import junit.framework.Assert;
 
+import static com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants.*;
 import static com.nullpointerengineering.android.pomodoro.utilities.EulaTest.EULA_KEY;
 
 /**
@@ -40,6 +47,7 @@ public class TaskManagerTests extends ActivityInstrumentationTestCase2<TaskManag
     private Context context;
     private TaskManager activity;
     private Solo solo;
+    private BulkTaskMaker taskMaker;
 
     public TaskManagerTests() {
         super(TaskManager.class);
@@ -50,24 +58,18 @@ public class TaskManagerTests extends ActivityInstrumentationTestCase2<TaskManag
         super.setUp();
         setActivityInitialTouchMode(false);
         PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putBoolean(EULA_KEY, true).commit();
-
         taskManager = getActivity();
         context = taskManager.getApplicationContext();
         activity = getActivity();
         solo = new Solo(getInstrumentation(), activity);
-
-        Seed seed = Seed.data().basedOn(context).table(DatabaseConstants.TABLE_TASKS).clear();
-        seed.insert(BulkTaskMaker.taskValues(10, false));
-        seed.insert(BulkTaskMaker.taskValues(11, true));
+        taskMaker = new BulkTaskMaker(context);
         getInstrumentation().waitForIdleSync();
     }
 
     public void testListView() {
+        taskMaker.taskValues(5, false);
         solo.clickOnText("Undone test task 1");
         solo.waitForActivity("TaskEditor");
+        solo.assertCurrentActivity("Didn't find Expected activity TaskEditor", TaskEditor.class);
     }
-
-
-
-
 }
