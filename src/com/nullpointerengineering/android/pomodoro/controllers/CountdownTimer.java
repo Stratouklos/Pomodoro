@@ -35,7 +35,7 @@ import static com.nullpointerengineering.android.pomodoro.controllers.CountdownT
 public class CountdownTimer {
 
     private static CountdownTimer INSTANCE;
-    private static final String TAG = "TimerService";
+    private static final String TAG = "CountdownTimer";
     private static final boolean D = true;
 
     private Timer timer;
