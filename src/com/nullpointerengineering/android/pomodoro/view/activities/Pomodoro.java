@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.TextView;
 import com.nullpointerengineering.android.pomodoro.R;
 import com.nullpointerengineering.android.pomodoro.controllers.TimerListener;
+import com.nullpointerengineering.android.pomodoro.persistence.SqlTaskRepository;
 import com.nullpointerengineering.android.pomodoro.persistence.Task;
 import com.nullpointerengineering.android.pomodoro.persistence.TaskRepository;
 import com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants;
@@ -65,7 +66,7 @@ public class Pomodoro extends Activity implements TimerListener {
 
         TextView taskTitle = (TextView) findViewById(R.id.task_title);
         long taskId = getIntent().getExtras().getLong(DatabaseConstants.TASK_KEY_ID);
-        TaskRepository repository = new TaskRepository(this);
+        TaskRepository repository = new SqlTaskRepository(this);
         Task task = repository.findTaskById(taskId);
         taskTitle.setText(task.getTitle());
 

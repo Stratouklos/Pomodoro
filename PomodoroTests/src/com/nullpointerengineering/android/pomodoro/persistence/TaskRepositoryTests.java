@@ -38,7 +38,7 @@ public class TaskRepositoryTests extends AndroidTestCase {
 
     @Override
     protected void setUp(){
-        repository = new TaskRepository(getContext());
+        repository = new SqlTaskRepository(getContext());
         taskId = repository.createTask("Test task",1,5).getId();
     }
 

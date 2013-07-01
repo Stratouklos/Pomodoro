@@ -27,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import com.nullpointerengineering.android.pomodoro.R;
+import com.nullpointerengineering.android.pomodoro.persistence.SqlTaskRepository;
 import com.nullpointerengineering.android.pomodoro.view.adapters.TaskCursorAdapter;
 import com.nullpointerengineering.android.pomodoro.persistence.Task;
 import com.nullpointerengineering.android.pomodoro.persistence.TaskLoader;
@@ -125,7 +126,7 @@ public class TaskManager extends ListActivity implements View.OnClickListener, A
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        TaskRepository repository = new TaskRepository(this);
+        TaskRepository repository = new SqlTaskRepository(this);
         switch(item.getItemId()) {
             case DONE_ID:
                 Task task = repository.findTaskById(info.id);

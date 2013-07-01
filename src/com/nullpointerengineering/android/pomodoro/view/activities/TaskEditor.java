@@ -26,6 +26,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import com.nullpointerengineering.android.pomodoro.R;
+import com.nullpointerengineering.android.pomodoro.persistence.SqlTaskRepository;
 import com.nullpointerengineering.android.pomodoro.persistence.Task;
 import com.nullpointerengineering.android.pomodoro.persistence.TaskRepository;
 import com.nullpointerengineering.android.pomodoro.view.widgets.NumberPicker;
@@ -52,7 +53,7 @@ public class TaskEditor extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.task_edit);
 
-        repository = new TaskRepository(this);
+        repository = new SqlTaskRepository(this);
         titleText = (EditText) findViewById(R.id.title);
         priorityPicker = (NumberPicker) findViewById(R.id.priority);
         estimationPicker = (NumberPicker) findViewById(R.id.work_units);

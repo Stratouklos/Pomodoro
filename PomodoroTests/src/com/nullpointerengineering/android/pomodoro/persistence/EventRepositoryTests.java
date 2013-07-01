@@ -40,7 +40,7 @@ public class EventRepositoryTests extends AndroidTestCase {
 
     @Override
     protected void setUp(){
-        repository = new EventRepository(getContext());
+        repository = new SqlEventRepository(getContext());
         nowMillis = Instant.now().getMillis();
     }
 
