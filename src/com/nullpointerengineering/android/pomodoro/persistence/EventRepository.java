@@ -16,13 +16,6 @@
 
 package com.nullpointerengineering.android.pomodoro.persistence;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Stratos
- * Date: 01/07/13
- * Time: 5:18 PM
- * To change this template use File | Settings | File Templates.
- */
 public interface EventRepository {
     Event createEvent(String type, long timeStarted, long totalDuration, long actualDuration);
 
