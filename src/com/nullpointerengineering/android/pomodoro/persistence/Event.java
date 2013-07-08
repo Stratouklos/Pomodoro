@@ -19,80 +19,20 @@ package com.nullpointerengineering.android.pomodoro.persistence;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Stratos
- * Date: 17/03/13
- * Time: 12:42 PM
- * Event domain object.
- */
-public class Event {
-
-    private final long id;
-    private final Type type;
-    private final Duration totalDuration;
-    private final Duration actualDuration;
-    private final DateTime timeCreated;
-
+public interface Event {
     public enum Type {
         POMODORO,
-        BREAK;
-
-        public String toString() {
-            switch (this) {
-                case POMODORO:
-                    return "pomodoro";
-                case BREAK:
-                    return "break";
-                default:
-                    return "pomodoro";
-            }
-        }
-
-        private static Type getType(String typeName){
-            if ( typeName.toLowerCase().equals("pomodoro")) {
-                return POMODORO;
-            } else if (typeName.toLowerCase().equals("break")) {
-                return BREAK;
-            } else {
-                throw new IllegalArgumentException("Illegal typeString " + typeName + " is not valid." );
-            }
-        }
+        LONG_BREAK,
+        BREAK
     }
 
-    Event(long id, long timeCreatedInMillis, String typeString, long totalDurationInMillis, long actualDurationInMillis) {
-        if (id < 0) throw new IllegalArgumentException("Illegal id " + id);
-        if (timeCreatedInMillis < 0) throw new IllegalArgumentException("Illegal crated time " + timeCreatedInMillis);
+    long getId();
 
-        this.id = id;
-        timeCreated = new DateTime(timeCreatedInMillis * 1000);
-        type = Type.getType(typeString);
-        totalDuration = getDuration(totalDurationInMillis);
-        actualDuration = getDuration(actualDurationInMillis);
-    }
+    Type getType();
 
-    private Duration getDuration(long duration){
-        if (duration > 0) return new Duration(duration);
-        else throw new IllegalArgumentException("Illegal duration argument " + duration);
-    }
+    Duration getTotalDuration();
 
-    public long getId() {
-        return id;
-    }
+    Duration getActualDuration();
 
-    public Type getType() {
-        return type;
-    }
-
-    public Duration getTotalDuration() {
-        return totalDuration;
-    }
-
-    public Duration getActualDuration() {
-        return actualDuration;
-    }
-
-    public DateTime getTimeCreated() {
-        return timeCreated;
-    }
+    DateTime getTimeCreated();
 }

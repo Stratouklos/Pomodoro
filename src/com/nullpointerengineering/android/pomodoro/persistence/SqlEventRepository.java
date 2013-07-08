@@ -94,6 +94,6 @@ public class SqlEventRepository implements EventRepository {
         String type = cursor.getString(2);
         long totalTime = cursor.getLong(3);
         long actualTime = cursor.getLong(4);
-        return new Event(id, timeCreated, type, totalTime, actualTime);
+        return new EventImplementation(id, timeCreated, type, totalTime, actualTime);
     }
 }

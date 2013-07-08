@@ -65,9 +65,11 @@ public class EventRepositoryTests extends AndroidTestCase {
     public void testSaveEvent() {
         eventId = repository.createEvent("pomodoro", nowMillis, TOTAL_TIME, ACTUAL_TIME).getId();
         Event event = repository.findEventById(eventId);
-        repository.saveEvent(new Event(event.getId(), event.getTimeCreated().getMillis(), "break", TOTAL_TIME , ACTUAL_TIME));
+        Event savedEvent = new EventImplementation(
+                event.getId(), event.getTimeCreated().getMillis(), Event.Type.BREAK, TOTAL_TIME , ACTUAL_TIME);
+        repository.saveEvent(savedEvent);
         event = repository.findEventById(eventId);
-        assertEquals(Event.Type.BREAK, event.getType());
+        assertEquals(EventImplementation.Type.BREAK, event.getType());
     }
 
 }

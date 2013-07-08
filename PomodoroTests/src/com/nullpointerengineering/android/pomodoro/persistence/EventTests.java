@@ -33,12 +33,12 @@ import static com.nullpointerengineering.android.pomodoro.persistence.Event.Type
 public class EventTests extends AndroidTestCase {
 
     public void testPomodoroType() {
-        Event event = new Event(0, 0, "pomodoro", 1000, 1000);
+        Event event = new EventImplementation(0, 0, "pomodoro", 1000, 1000);
         assertEquals(POMODORO, event.getType());
     }
 
     public void testBreakType() {
-        Event event = new Event(0, 0, "break", 1000, 1000);
+        Event event = new EventImplementation(0, 0, "break", 1000, 1000);
         assertEquals(BREAK, event.getType());
     }
 
@@ -47,7 +47,7 @@ public class EventTests extends AndroidTestCase {
         IllegalArgumentException expected = new IllegalArgumentException("Illegal typeString bad is not valid.");
         IllegalArgumentException caught = null;
         try {
-            new Event(0, 0, "bad", 1000, 1000);
+            new EventImplementation(0, 0, "bad", 1000, 1000);
         } catch (IllegalArgumentException e) {
             caught = e;
         }
@@ -57,13 +57,13 @@ public class EventTests extends AndroidTestCase {
     }
 
     public void testTotalDuration() {
-        Event event = new Event(0, 0 ,"pomodoro", 1000, 1000);
+        Event event = new EventImplementation(0, 0 ,"pomodoro", 1000, 1000);
         Duration expected = new Duration(1000);
         assertEquals(expected, event.getTotalDuration());
     }
 
     public void testActualDuration() {
-        Event event = new Event(0, 0 ,"pomodoro", 1000, 1000);
+        Event event = new EventImplementation(0, 0 ,"pomodoro", 1000, 1000);
         Duration expected = new Duration(1000);
         assertEquals(expected, event.getActualDuration());
     }
@@ -73,7 +73,7 @@ public class EventTests extends AndroidTestCase {
         IllegalArgumentException expected = new IllegalArgumentException("Illegal duration argument -1000");
         IllegalArgumentException caught = null;
         try {
-            new Event(0, 0, "pomodoro", - 1000, 1000);
+            new EventImplementation(0, 0, "pomodoro", - 1000, 1000);
         } catch (IllegalArgumentException e) {
             caught = e;
         }
@@ -87,7 +87,7 @@ public class EventTests extends AndroidTestCase {
         IllegalArgumentException expected = new IllegalArgumentException("Illegal id -1");
         IllegalArgumentException caught = null;
         try {
-            new Event(-1, 0, "pomodoro", 1000, 1000);
+            new EventImplementation(-1, 0, "pomodoro", 1000, 1000);
         } catch (IllegalArgumentException e) {
             caught = e;
         }
@@ -99,7 +99,7 @@ public class EventTests extends AndroidTestCase {
     public void testCreatedOn() {
         long millis = System.currentTimeMillis();
         DateTime expected = new DateTime(millis * 1000);
-        Event event = new Event(0, millis, "pomodoro", 1000, 1000);
+        Event event = new EventImplementation(0, millis, "pomodoro", 1000, 1000);
         assertEquals(expected, event.getTimeCreated());
     }
 
@@ -108,7 +108,7 @@ public class EventTests extends AndroidTestCase {
         IllegalArgumentException expected = new IllegalArgumentException("Illegal crated time -1000");
         IllegalArgumentException caught = null;
         try {
-            new Event(0, -1000, "pomodoro", 1000, 1000);
+            new EventImplementation(0, -1000, "pomodoro", 1000, 1000);
         } catch (IllegalArgumentException e) {
             caught = e;
         }
