@@ -69,13 +69,17 @@
     <string name="preference_menu">Preferences</string>
     <string name="timer_preferences">Timer Length Setup</string>
     <string name="sound_preferences">Sound Setup</string>
-    <string name="pomodoro_length">Pomodoro length</string>
-    <string name="pomodoro_preference_summary">Enter the length of your pomodoro in minutes. Don\'t over/under do it.
-    </string>
-    <string name="small_break_length">Small break length</string>
+    <string name="pomodoro_length_prop_key">PomodoroLength</string>
+    <string name="pomodoro_tittle">Pomodoro length</string>
+    <string name="pomodoro_preference_summary">
+        Enter the length of your pomodoro in minutes. Don\'t over/under do it.</string>
+    <string name="small_break_length_prop_key">SmallBreakLength</string>
+    <string name="small_break_tittle">Small break length</string>
     <string name="small_break_summary">Enter the length of your small break in minutes. I said small!</string>
-    <string name="big_break_length">Big break length</string>
+    <string name="big_break_length_prop_key">BigBreakLength</string>
+    <string name="big_break_tittle">Big break length</string>
     <string name="big_break_summary">Enter the length of your big break in minutes. Maximum: 24 hours :)</string>
+    <string name="pomodoro_interval_prop_key">BigBreakInterval</string>
     <string name="pomodoro_interval">Big break Interval</string>
     <string name="pomodoro_interval_summary">Suggested value is 4 adjust according to your preferences</string>
     <string name="chime_title">Chiming</string>

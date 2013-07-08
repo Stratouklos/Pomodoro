@@ -21,22 +21,22 @@
         android:title="@string/timer_preferences"
         android:key="first_category">
         <android.preference.EditTextPreference
-            android:title="@string/pomodoro_length"
-            android:key="pomodoro_length"
+            android:title="@string/pomodoro_tittle"
+            android:key="@string/pomodoro_length_prop_key"
             android:summary="@string/pomodoro_preference_summary"
             android:defaultValue="25"
             android:numeric="integer"
             android:maxLength="2"/>
         <android.preference.EditTextPreference
-            android:title="@string/small_break_length"
-            android:key="small_break_length"
+            android:title="@string/small_break_tittle"
+            android:key="@string/small_break_length_prop_key"
             android:summary="@string/small_break_summary"
             android:defaultValue="5"
             android:numeric="integer"
             android:maxLength="2"/>
         <android.preference.EditTextPreference
-            android:title="@string/big_break_length"
-            android:key="big_break_length"
+            android:title="@string/big_break_tittle"
+            android:key="@string/big_break_length_prop_key"
             android:summary="@string/big_break_summary"
             android:defaultValue="10"
             android:numeric="integer"
@@ -44,7 +44,7 @@
         <android.preference.EditTextPreference
             android:title="@string/pomodoro_interval"
             android:summary="@string/pomodoro_interval_summary"
-            android:key="pomodoro_interval"
+            android:key="@string/pomodoro_interval_prop_key"
             android:defaultValue="4"
             android:numeric="integer"
             android:maxLength="1"/>
