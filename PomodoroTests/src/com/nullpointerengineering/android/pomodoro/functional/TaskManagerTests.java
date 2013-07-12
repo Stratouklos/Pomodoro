@@ -16,21 +16,14 @@
 
 package com.nullpointerengineering.android.pomodoro.functional;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.preference.PreferenceManager;
 import android.test.ActivityInstrumentationTestCase2;
 import com.jayway.android.robotium.solo.Solo;
-import com.nullpointerengineering.android.pomodoro.persistence.TaskRepository;
-import com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants;
-import com.nullpointerengineering.android.pomodoro.tests.R;
 import com.nullpointerengineering.android.pomodoro.utils.BulkTaskMaker;
-import com.nullpointerengineering.android.pomodoro.utils.DataSeeder;
 import com.nullpointerengineering.android.pomodoro.view.activities.TaskEditor;
 import com.nullpointerengineering.android.pomodoro.view.activities.TaskManager;
-import junit.framework.Assert;
 
-import static com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants.*;
 import static com.nullpointerengineering.android.pomodoro.utilities.EulaTest.EULA_KEY;
 
 /**

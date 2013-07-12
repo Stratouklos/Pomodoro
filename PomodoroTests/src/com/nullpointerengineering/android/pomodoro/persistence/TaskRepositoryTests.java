@@ -17,6 +17,8 @@
 package com.nullpointerengineering.android.pomodoro.persistence;
 
 import android.test.AndroidTestCase;
+import com.nullpointerengineering.android.pomodoro.model.task.Task;
+import com.nullpointerengineering.android.pomodoro.model.task.TaskRepository;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 

@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package com.nullpointerengineering.android.pomodoro.persistence;
+package com.nullpointerengineering.android.pomodoro.model.task;
+
+import com.nullpointerengineering.android.pomodoro.model.task.Task;
 
 /**
  * Created with IntelliJ IDEA.

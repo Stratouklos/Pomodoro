@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nullpointerengineering.android.pomodoro.persistence;
+package com.nullpointerengineering.android.pomodoro.model.task;
 
 import org.joda.time.DateTime;
 
@@ -36,7 +36,7 @@ public class Task {
     private DateTime timeCreated;
     private DateTime timeDone;
 
-    Task(long id, String title, int priority, int estimate, int actual, long timeCreated, long timeDone) {
+    public Task(long id, String title, int priority, int estimate, int actual, long timeCreated, long timeDone) {
         this.id = id;
         this.title = title;
         this.priority = priority;

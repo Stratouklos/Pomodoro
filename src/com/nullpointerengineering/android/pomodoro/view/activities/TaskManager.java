@@ -29,9 +29,9 @@ import android.widget.*;
 import com.nullpointerengineering.android.pomodoro.R;
 import com.nullpointerengineering.android.pomodoro.persistence.SqlTaskRepository;
 import com.nullpointerengineering.android.pomodoro.view.adapters.TaskCursorAdapter;
-import com.nullpointerengineering.android.pomodoro.persistence.Task;
+import com.nullpointerengineering.android.pomodoro.model.task.Task;
 import com.nullpointerengineering.android.pomodoro.persistence.TaskLoader;
-import com.nullpointerengineering.android.pomodoro.persistence.TaskRepository;
+import com.nullpointerengineering.android.pomodoro.model.task.TaskRepository;
 import com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants;
 import com.nullpointerengineering.android.pomodoro.utilities.Eula;
 

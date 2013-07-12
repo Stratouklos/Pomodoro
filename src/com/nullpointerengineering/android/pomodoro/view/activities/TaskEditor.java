@@ -27,8 +27,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.nullpointerengineering.android.pomodoro.R;
 import com.nullpointerengineering.android.pomodoro.persistence.SqlTaskRepository;
-import com.nullpointerengineering.android.pomodoro.persistence.Task;
-import com.nullpointerengineering.android.pomodoro.persistence.TaskRepository;
+import com.nullpointerengineering.android.pomodoro.model.task.Task;
+import com.nullpointerengineering.android.pomodoro.model.task.TaskRepository;
 import com.nullpointerengineering.android.pomodoro.view.widgets.NumberPicker;
 
 import static com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants.*;
