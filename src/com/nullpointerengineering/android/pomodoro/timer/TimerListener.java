@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nullpointerengineering.android.pomodoro.controllers;
+package com.nullpointerengineering.android.pomodoro.timer;
 
 import org.joda.time.Duration;
 import org.joda.time.Seconds;

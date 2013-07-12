@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nullpointerengineering.android.pomodoro.controllers;
+package com.nullpointerengineering.android.pomodoro.timer;
 
 import android.util.Log;
 
@@ -23,7 +23,7 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static com.nullpointerengineering.android.pomodoro.controllers.CountdownTimer.State.*;
+import static com.nullpointerengineering.android.pomodoro.timer.CountdownTimer.State.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -34,7 +34,7 @@ import static com.nullpointerengineering.android.pomodoro.controllers.CountdownT
  */
 public class CountdownTimer {
 
-    private static CountdownTimer INSTANCE;
+    private static final CountdownTimer INSTANCE = new CountdownTimer();
     private static final String TAG = "CountdownTimer";
     private static final boolean D = true;
 
@@ -57,8 +57,7 @@ public class CountdownTimer {
         start = STARTING_DURATION;
     }
 
-    public synchronized static CountdownTimer getInstance(){
-        if (INSTANCE == null) INSTANCE = new CountdownTimer();
+    public static CountdownTimer getInstance(){
         return INSTANCE;
     }
 

@@ -1,9 +1,9 @@
 package com.nullpointerengineering.android.pomodoro.services;
 
 import android.test.AndroidTestCase;
-import com.nullpointerengineering.android.pomodoro.controllers.CountdownTimer;
+import com.nullpointerengineering.android.pomodoro.timer.CountdownTimer;
 
-import static com.nullpointerengineering.android.pomodoro.controllers.CountdownTimer.State.*;
+import static com.nullpointerengineering.android.pomodoro.timer.CountdownTimer.State.*;
 
 /**
  * Created with IntelliJ IDEA.
