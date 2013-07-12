@@ -17,10 +17,13 @@
 package com.nullpointerengineering.android.pomodoro.persistence;
 
 import android.test.AndroidTestCase;
+import com.nullpointerengineering.android.pomodoro.model.event.Event;
+import com.nullpointerengineering.android.pomodoro.model.event.EventImpl;
+import com.nullpointerengineering.android.pomodoro.model.event.EventRepository;
 import org.joda.time.Duration;
 import org.joda.time.Instant;
 
-import static com.nullpointerengineering.android.pomodoro.persistence.Event.Type.*;
+import static com.nullpointerengineering.android.pomodoro.model.event.Event.Type.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -65,11 +68,11 @@ public class EventRepositoryTests extends AndroidTestCase {
     public void testSaveEvent() {
         eventId = repository.createEvent("pomodoro", nowMillis, TOTAL_TIME, ACTUAL_TIME).getId();
         Event event = repository.findEventById(eventId);
-        Event savedEvent = new EventImplementation(
-                event.getId(), event.getTimeCreated().getMillis(), Event.Type.BREAK, TOTAL_TIME , ACTUAL_TIME);
+        Event savedEvent = new EventImpl(
+                event.getId(), event.getTimeCreated().getMillis(), SMALL_BREAK, TOTAL_TIME , ACTUAL_TIME);
         repository.saveEvent(savedEvent);
         event = repository.findEventById(eventId);
-        assertEquals(EventImplementation.Type.BREAK, event.getType());
+        assertEquals(SMALL_BREAK, event.getType());
     }
 
 }

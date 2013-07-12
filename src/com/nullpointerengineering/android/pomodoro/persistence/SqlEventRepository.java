@@ -22,6 +22,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import com.google.common.collect.ImmutableBiMap;
+import com.nullpointerengineering.android.pomodoro.model.event.Event;
+import com.nullpointerengineering.android.pomodoro.model.event.EventImpl;
+import com.nullpointerengineering.android.pomodoro.model.event.EventRepository;
 
 import static com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants.*;
 import static com.nullpointerengineering.android.pomodoro.persistence.database.EventProvider.*;
@@ -36,6 +40,11 @@ import static com.nullpointerengineering.android.pomodoro.persistence.database.E
 public class SqlEventRepository implements EventRepository {
 
     private ContentResolver resolver;
+    public static final ImmutableBiMap<String, Event.Type> EVENT_TYPE_MAPPER = ImmutableBiMap.of(
+            EVENT_TYPE_BIG_BREAK, Event.Type.BIG_BREAK,
+            EVENT_TYPE_SMALL_BREAK, Event.Type.SMALL_BREAK,
+            EVENT_TYPE_POMODORO, Event.Type.POMODORO
+    );
 
     public SqlEventRepository(Context context) {
         resolver = context.getContentResolver();
@@ -75,7 +84,7 @@ public class SqlEventRepository implements EventRepository {
         ContentValues eventValues = new ContentValues();
         eventValues.put(EVENT_KEY_ID, event.getId());
         eventValues.put(EVENT_TIME_STARTED, event.getTimeCreated().toInstant().getMillis());
-        eventValues.put(EVENT_TYPE, event.getType().toString());
+        eventValues.put(EVENT_TYPE, EVENT_TYPE_MAPPER.inverse().get(event.getType()));
         eventValues.put(EVENT_TOTAL_DURATION, event.getTotalDuration().getMillis());
         eventValues.put(EVENT_ACTUAL_DURATION, event.getActualDuration().getMillis());
         Uri eventUri = ContentUris.withAppendedId(CONTENT_ID_URI_BASE, event.getId());
@@ -94,6 +103,6 @@ public class SqlEventRepository implements EventRepository {
         String type = cursor.getString(2);
         long totalTime = cursor.getLong(3);
         long actualTime = cursor.getLong(4);
-        return new EventImplementation(id, timeCreated, type, totalTime, actualTime);
+        return new EventImpl(id, timeCreated, EVENT_TYPE_MAPPER.get(type), totalTime, actualTime);
     }
 }

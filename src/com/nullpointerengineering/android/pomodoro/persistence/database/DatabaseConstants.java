@@ -60,6 +60,10 @@ public class DatabaseConstants {
     public static final String EVENT_TOTAL_DURATION = "total_duration";
     public static final String EVENT_TIME_STARTED = "started_on";
 
+    public static final String EVENT_TYPE_POMODORO = "pomodoro";
+    public static final String EVENT_TYPE_SMALL_BREAK = "small_break";
+    public static final String EVENT_TYPE_BIG_BREAK = "big_break";
+
     //Database Version
     public static final int  DATABASE_VERSION = 1;
 }

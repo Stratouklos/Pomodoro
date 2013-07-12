@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nullpointerengineering.android.pomodoro.persistence;
+package com.nullpointerengineering.android.pomodoro.model.event;
 
 public interface EventRepository {
     Event createEvent(String type, long timeStarted, long totalDuration, long actualDuration);

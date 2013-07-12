@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nullpointerengineering.android.pomodoro.persistence;
+package com.nullpointerengineering.android.pomodoro.model.event;
 
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
@@ -26,7 +26,7 @@ import org.joda.time.Duration;
  * Time: 12:42 PM
  * Event domain object.
  */
-public class EventImplementation implements Event {
+public class EventImpl implements Event {
 
     private final long id;
     private final Event.Type type;
@@ -36,7 +36,7 @@ public class EventImplementation implements Event {
 
 
 
-    EventImplementation(long id, long timeCreatedInMillis, Event.Type type, long totalDurationInMillis, long actualDurationInMillis) {
+    public EventImpl(long id, long timeCreatedInMillis, Event.Type type, long totalDurationInMillis, long actualDurationInMillis) {
         if (id < 0) throw new IllegalArgumentException("Illegal id " + id);
         if (timeCreatedInMillis < 0) throw new IllegalArgumentException("Illegal crated time " + timeCreatedInMillis);
 
