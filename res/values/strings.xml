@@ -79,9 +79,9 @@
     <string name="big_break_length_prop_key">BigBreakLength</string>
     <string name="big_break_tittle">Big break length</string>
     <string name="big_break_summary">Enter the length of your big break in minutes. Maximum: 24 hours :)</string>
-    <string name="pomodoro_interval_prop_key">BigBreakInterval</string>
-    <string name="pomodoro_interval">Big break Interval</string>
-    <string name="pomodoro_interval_summary">Suggested value is 4 adjust according to your preferences</string>
+    <string name="big_break_interval_prop_key">BigBreakInterval</string>
+    <string name="big_break_interval">Big break Interval</string>
+    <string name="big_break_interval_summary">Suggested value is 4 adjust according to your preferences</string>
     <string name="chime_title">Chiming</string>
     <string name="chime_preference_summary">Enable/Disable the audible chime at the end of a timer</string>
     <string name="tick_title">Ticking</string>

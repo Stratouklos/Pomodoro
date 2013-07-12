@@ -42,9 +42,9 @@
             android:numeric="integer"
             android:maxLength="2"/>
         <android.preference.EditTextPreference
-            android:title="@string/pomodoro_interval"
-            android:summary="@string/pomodoro_interval_summary"
-            android:key="@string/pomodoro_interval_prop_key"
+            android:title="@string/big_break_interval"
+            android:summary="@string/big_break_interval_summary"
+            android:key="@string/big_break_interval_prop_key"
             android:defaultValue="4"
             android:numeric="integer"
             android:maxLength="1"/>
