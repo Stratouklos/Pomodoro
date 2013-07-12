@@ -22,8 +22,8 @@ import org.joda.time.Duration;
 public interface Event {
     public enum Type {
         POMODORO,
-        LONG_BREAK,
-        BREAK
+        SMALL_BREAK,
+        BIG_BREAK
     }
 
     long getId();
