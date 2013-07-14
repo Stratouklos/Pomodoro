@@ -16,15 +16,19 @@
 
 package com.nullpointerengineering.android.pomodoro.functional;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.preference.PreferenceManager;
 import android.test.ActivityInstrumentationTestCase2;
 import com.jayway.android.robotium.solo.Solo;
+import com.nullpointerengineering.android.pomodoro.R;
+import com.nullpointerengineering.android.pomodoro.eula.Eula;
 import com.nullpointerengineering.android.pomodoro.utils.BulkTaskMaker;
 import com.nullpointerengineering.android.pomodoro.view.activities.TaskEditor;
 import com.nullpointerengineering.android.pomodoro.view.activities.TaskManager;
 
-import static com.nullpointerengineering.android.pomodoro.utilities.EulaTest.EULA_KEY;
 
 /**
  * Created with IntelliJ IDEA.
@@ -35,12 +39,14 @@ import static com.nullpointerengineering.android.pomodoro.utilities.EulaTest.EUL
   */
 
 public class TaskManagerTests extends ActivityInstrumentationTestCase2<TaskManager> {
+    private static final int VERSION = 1;
+    public static final String EULA_KEY = Eula.EULA_PREFIX + VERSION;
 
-    private TaskManager taskManager;
-    private Context context;
-    private TaskManager activity;
-    private Solo solo;
+    private String  eulaText;
     private BulkTaskMaker taskMaker;
+    private Activity activity;
+    private Solo solo;
+
 
     public TaskManagerTests() {
         super(TaskManager.class);
@@ -50,17 +56,60 @@ public class TaskManagerTests extends ActivityInstrumentationTestCase2<TaskManag
     protected void setUp() throws Exception {
         super.setUp();
         setActivityInitialTouchMode(false);
-        PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putBoolean(EULA_KEY, true).commit();
-        taskManager = getActivity();
-        context = taskManager.getApplicationContext();
+        PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putBoolean(EULA_KEY, false).commit();
+        TaskManager taskManager = getActivity();
+        Context context = taskManager.getApplicationContext();
         activity = getActivity();
         solo = new Solo(getInstrumentation(), activity);
         taskMaker = new BulkTaskMaker(context);
         getInstrumentation().waitForIdleSync();
+        activity = getActivity();
+        eulaText = activity.getResources().getString(R.string.eula).substring(0, 200);
+    }
+
+    private void restart(boolean showEULA) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
+        preferences.edit().putBoolean(EULA_KEY, !showEULA).commit();
+        activity.finish();
+        setActivity(null);
+        activity = getActivity();
+        solo = new Solo(getInstrumentation(), getActivity());
+        setActivityInitialTouchMode(false);
+        getInstrumentation().waitForIdleSync();
+    }
+
+    public void testEulaShown(){
+        restart(true);
+        assertTrue(solo.searchText(eulaText));
+    }
+
+    public void testEulaAcceptOK(){
+        restart(true);
+        solo.clickOnButton(activity.getResources().getString(android.R.string.ok));
+        solo.assertCurrentActivity("Task Manager should be running", TaskManager.class);
+    }
+
+    public void testEulaReject(){
+        restart(true);
+        solo.clickOnButton(activity.getResources().getString(android.R.string.cancel));
+        getInstrumentation().waitForIdleSync();
+        assertTrue(activity.isFinishing());
+    }
+
+
+    public void testEulaNotShown(){
+        restart(false);
+        assertFalse(solo.searchText(eulaText));
+    }
+
+    public void testPackageInfo() {
+        PackageInfo info = Eula.getPackageInfo(activity);
+        assertEquals(VERSION, info.versionCode);
     }
 
     public void testListView() {
         taskMaker.taskValues(5, false);
+        restart(false);
         solo.clickOnText("Undone test task 1");
         solo.waitForActivity("TaskEditor");
         solo.assertCurrentActivity("Didn't find Expected activity TaskEditor", TaskEditor.class);

@@ -38,7 +38,7 @@ import com.nullpointerengineering.android.pomodoro.R;
 
 public final class Eula {
 
-    protected  static final String EULA_PREFIX = "eula_";
+    public static final String EULA_PREFIX = "eula_";
 
     public static void show(final Activity activity) {
         PackageInfo versionInfo = getPackageInfo(activity);
@@ -79,7 +79,7 @@ public final class Eula {
         }
     }
 
-    protected static PackageInfo getPackageInfo(Activity activity) {
+    public static PackageInfo getPackageInfo(Activity activity) {
         PackageInfo pi = null;
         try {
             pi = activity.getPackageManager().getPackageInfo(activity.getPackageName(), PackageManager.GET_ACTIVITIES);
