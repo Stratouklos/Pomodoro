@@ -33,7 +33,7 @@ import com.nullpointerengineering.android.pomodoro.model.task.Task;
 import com.nullpointerengineering.android.pomodoro.persistence.TaskLoader;
 import com.nullpointerengineering.android.pomodoro.model.task.TaskRepository;
 import com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants;
-import com.nullpointerengineering.android.pomodoro.utilities.Eula;
+import com.nullpointerengineering.android.pomodoro.eula.Eula;
 
 import static com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants.TASK_KEY_ID;
 
