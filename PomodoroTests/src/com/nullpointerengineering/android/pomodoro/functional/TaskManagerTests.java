@@ -19,7 +19,6 @@ package com.nullpointerengineering.android.pomodoro.functional;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
 import android.preference.PreferenceManager;
 import android.test.ActivityInstrumentationTestCase2;
 import com.jayway.android.robotium.solo.Solo;
@@ -102,10 +101,6 @@ public class TaskManagerTests extends ActivityInstrumentationTestCase2<TaskManag
         assertFalse(solo.searchText(eulaText));
     }
 
-    public void testPackageInfo() {
-        PackageInfo info = Eula.getPackageInfo(activity);
-        assertEquals(VERSION, info.versionCode);
-    }
 
     public void testListView() {
         taskMaker.taskValues(5, false);

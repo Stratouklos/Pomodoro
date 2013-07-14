@@ -35,7 +35,7 @@ public class EventConfigurationTests extends AndroidTestCase{
     }
 
     public void testGetBigBreakDuration() {
-        assertEquals(15, eventConfiguration.getDuration(BIG_BREAK));
+        assertEquals(10, eventConfiguration.getDuration(BIG_BREAK));
     }
 
     public void testGetSmallBreakDuration() {
