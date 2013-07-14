@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nullpointerengineering.android.pomodoro.utilities;
+package com.nullpointerengineering.android.pomodoro.eula;
 
 import android.app.Activity;
 import android.app.AlertDialog;
