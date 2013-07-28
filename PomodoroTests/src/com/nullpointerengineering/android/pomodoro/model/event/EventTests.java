@@ -21,6 +21,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
 import static com.nullpointerengineering.android.pomodoro.model.event.Event.Type.*;
+import static com.nullpointerengineering.android.pomodoro.model.event.EventImpl.BAD_TIME_ARGUMENT;
 
 /**
  * Created with IntelliJ IDEA.
@@ -56,7 +57,7 @@ public class EventTests extends AndroidTestCase {
 
     public void testNegativeDuration() {
         @SuppressWarnings("ThrowableInstanceNeverThrown")
-        IllegalArgumentException expected = new IllegalArgumentException("Illegal duration argument -1000");
+        IllegalArgumentException expected = new IllegalArgumentException(BAD_TIME_ARGUMENT);
         IllegalArgumentException caught = null;
         try {
             new EventImpl(0, 0, Event.Type.POMODORO, - 1000, 1000);
@@ -91,7 +92,7 @@ public class EventTests extends AndroidTestCase {
 
     public void testNegativeCreatedOn() {
         @SuppressWarnings("ThrowableInstanceNeverThrown")
-        IllegalArgumentException expected = new IllegalArgumentException("Illegal crated time -1000");
+        IllegalArgumentException expected = new IllegalArgumentException(BAD_TIME_ARGUMENT);
         IllegalArgumentException caught = null;
         try {
             new EventImpl(0, -1000, Event.Type.POMODORO, 1000, 1000);

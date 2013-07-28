@@ -14,25 +14,10 @@
  * limitations under the License.
  */
 
-package com.nullpointerengineering.android.pomodoro.persistence;
+package com.nullpointerengineering.android.pomodoro.model.event;
 
-import org.joda.time.DateTime;
-import org.joda.time.Duration;
+public interface EventProvider {
 
-public interface Event {
-    public enum Type {
-        POMODORO,
-        SMALL_BREAK,
-        BIG_BREAK
-    }
+    Event getEventNumber(int numberOfPastEvents);
 
-    long getId();
-
-    Type getType();
-
-    Duration getTotalDuration();
-
-    Duration getActualDuration();
-
-    DateTime getTimeCreated();
 }

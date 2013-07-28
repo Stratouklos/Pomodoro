@@ -22,12 +22,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.nullpointerengineering.android.pomodoro.R;
-import com.nullpointerengineering.android.pomodoro.controllers.TimerListener;
+import com.nullpointerengineering.android.pomodoro.timer.TimerListener;
 import com.nullpointerengineering.android.pomodoro.persistence.SqlTaskRepository;
-import com.nullpointerengineering.android.pomodoro.persistence.Task;
-import com.nullpointerengineering.android.pomodoro.persistence.TaskRepository;
+import com.nullpointerengineering.android.pomodoro.model.task.Task;
+import com.nullpointerengineering.android.pomodoro.model.task.TaskRepository;
 import com.nullpointerengineering.android.pomodoro.persistence.database.DatabaseConstants;
-import com.nullpointerengineering.android.pomodoro.controllers.CountdownTimer;
+import com.nullpointerengineering.android.pomodoro.timer.CountdownTimer;
 import com.nullpointerengineering.android.pomodoro.view.widgets.TimerFace;
 
 /**
@@ -49,9 +49,9 @@ public class Pomodoro extends Activity implements TimerListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        //Timer setup
+        //timer setup
         super.onCreate(savedInstanceState);
-        if (D) Log.d(TAG, "onStart");
+        if (D) Log.d(TAG, "onCreate");
         setContentView(R.layout.pomodoro);
 
         timerFace = (TimerFace) findViewById(R.id.timer_face);
@@ -75,8 +75,17 @@ public class Pomodoro extends Activity implements TimerListener {
         timer.start();
     }
 
-
+    @Override
     public void timerUpdate(final int time){
+        if (time == 0) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (D) Log.d(TAG, "Timer is finished");
+                    timerFace.setTime(time);
+                }
+            });
+        }
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -89,6 +98,7 @@ public class Pomodoro extends Activity implements TimerListener {
     @Override
     public void onPause(){
         super.onPause();
+        if (D) Log.d(TAG, "onPause");
         timer.stop();
         timer.deregisterListener(this);
     }

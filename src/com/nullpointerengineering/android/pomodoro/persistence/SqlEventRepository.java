@@ -51,12 +51,12 @@ public class SqlEventRepository implements EventRepository {
     }
 
     @Override
-    public Event createEvent(String type, long timeStarted, long totalDuration, long actualDuration) {
+    public Event createEvent(Event.Type type, long totalDurationInMillis) {
         ContentValues eventValues = new ContentValues();
-        eventValues.put(EVENT_TIME_STARTED, timeStarted);
-        eventValues.put(EVENT_TYPE, type);
-        eventValues.put(EVENT_TOTAL_DURATION, totalDuration);
-        eventValues.put(EVENT_ACTUAL_DURATION, actualDuration);
+        eventValues.put(EVENT_TIME_STARTED, System.currentTimeMillis());
+        eventValues.put(EVENT_TYPE, EVENT_TYPE_MAPPER.inverse().get(type));
+        eventValues.put(EVENT_TOTAL_DURATION, totalDurationInMillis);
+        eventValues.put(EVENT_ACTUAL_DURATION, 0);
 
         Uri uri = resolver.insert(CONTENT_URI, eventValues);
         long id = Long.parseLong(uri.getPathSegments().get(EVENT_ID_PATH_POSITION));

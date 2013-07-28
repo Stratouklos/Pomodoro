@@ -21,7 +21,6 @@ import com.nullpointerengineering.android.pomodoro.model.event.Event;
 import com.nullpointerengineering.android.pomodoro.model.event.EventImpl;
 import com.nullpointerengineering.android.pomodoro.model.event.EventRepository;
 import org.joda.time.Duration;
-import org.joda.time.Instant;
 
 import static com.nullpointerengineering.android.pomodoro.model.event.Event.Type.*;
 
@@ -36,15 +35,14 @@ public class EventRepositoryTests extends AndroidTestCase {
 
     private EventRepository repository;
     private long eventId;
-    private long nowMillis;
 
     private static final long TOTAL_TIME = 25 * 60 * 1000;
     private static final long ACTUAL_TIME = 15 * 60 * 1000;
 
     @Override
-    protected void setUp(){
+    protected void setUp() throws Exception {
+        super.setUp();
         repository = new SqlEventRepository(getContext());
-        nowMillis = Instant.now().getMillis();
     }
 
     @Override
@@ -53,20 +51,20 @@ public class EventRepositoryTests extends AndroidTestCase {
     }
 
     public void testCreatedEvent() {
-        eventId = repository.createEvent("pomodoro", nowMillis, TOTAL_TIME, ACTUAL_TIME).getId();
+        eventId = repository.createEvent(POMODORO, TOTAL_TIME).getId();
         assertTrue("Event id was expected to be above 0", (eventId > 0));
     }
 
     public void testFindEventById() {
-        eventId = repository.createEvent("pomodoro", nowMillis, TOTAL_TIME, ACTUAL_TIME).getId();
+        eventId = repository.createEvent(POMODORO, TOTAL_TIME).getId();
         Event event = repository.findEventById(eventId);
         assertEquals(POMODORO, event.getType());
-        assertEquals(new Duration(ACTUAL_TIME), event.getActualDuration());
+        assertEquals(new Duration(0), event.getActualDuration());
         assertEquals(new Duration(TOTAL_TIME), event.getTotalDuration());
     }
 
     public void testSaveEvent() {
-        eventId = repository.createEvent("pomodoro", nowMillis, TOTAL_TIME, ACTUAL_TIME).getId();
+        eventId = repository.createEvent(POMODORO, TOTAL_TIME).getId();
         Event event = repository.findEventById(eventId);
         Event savedEvent = new EventImpl(
                 event.getId(), event.getTimeCreated().getMillis(), SMALL_BREAK, TOTAL_TIME , ACTUAL_TIME);

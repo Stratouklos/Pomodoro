@@ -19,6 +19,8 @@ package com.nullpointerengineering.android.pomodoro.model.event;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
+import static com.google.common.base.Preconditions.*;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Stratos
@@ -34,22 +36,19 @@ public class EventImpl implements Event {
     private final Duration actualDuration;
     private final DateTime timeCreated;
 
-
+    public static final String BAD_TIME_ARGUMENT = "Time cannot be negative";
 
     public EventImpl(long id, long timeCreatedInMillis, Event.Type type, long totalDurationInMillis, long actualDurationInMillis) {
-        if (id < 0) throw new IllegalArgumentException("Illegal id " + id);
-        if (timeCreatedInMillis < 0) throw new IllegalArgumentException("Illegal crated time " + timeCreatedInMillis);
+        checkArgument(id >= 0, "Illegal id " + id);
+        checkArgument(timeCreatedInMillis >= 0, BAD_TIME_ARGUMENT);
+        checkArgument(totalDurationInMillis >= 0, BAD_TIME_ARGUMENT);
+        checkArgument(actualDurationInMillis >= 0,  BAD_TIME_ARGUMENT);
 
         this.id = id;
         timeCreated = new DateTime(timeCreatedInMillis * 1000);
         this.type = type;
-        totalDuration = getDuration(totalDurationInMillis);
-        actualDuration = getDuration(actualDurationInMillis);
-    }
-
-    private Duration getDuration(long duration){
-        if (duration > 0) return new Duration(duration);
-        else throw new IllegalArgumentException("Illegal duration argument " + duration);
+        totalDuration = new Duration(totalDurationInMillis);
+        actualDuration = new Duration(actualDurationInMillis);
     }
 
     @Override

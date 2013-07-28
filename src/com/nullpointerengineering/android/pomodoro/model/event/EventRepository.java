@@ -17,7 +17,7 @@
 package com.nullpointerengineering.android.pomodoro.model.event;
 
 public interface EventRepository {
-    Event createEvent(String type, long timeStarted, long totalDuration, long actualDuration);
+    Event createEvent(Event.Type type, long totalDurationInMillis);
 
     Event findEventById(long id);
 
